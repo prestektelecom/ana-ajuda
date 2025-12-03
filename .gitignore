@@ -1,0 +1,6 @@
+/data/
+/feedback.db
+node_modules/
+.vscode/
+*.log
+.DS_Store

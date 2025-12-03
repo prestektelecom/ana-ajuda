@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Atendimento – Problemas de Conexão | PRESTEK Telecom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+<style>
+:root {
+  /* Fundo dark, puxando mais para azul oceano */
+--bg-gradient: radial-gradient(
+  circle at top,
+  #0b2948 0,
+  #061525 45%,
+  #020617 100%
+);
+
+
+  /* Cards escuros levemente mais azuis */
+  --card-bg: #020a17;
+  --card-border: rgba(30, 64, 175, 0.6); /* indigo discreto */
+
+  /* Acento ciano/teal (mantém clima tech) */
+  --accent: #22c1d6;
+  --accent-soft: rgba(34, 193, 214, 0.2);
+
+  /* Textos */
+  --text-main: #e5e7eb;
+  --text-soft: #94a3b8;
+  --text-strong: #f9fafb;
+
+  /* Chips / pílulas */
+  --chip-bg: rgba(9, 16, 35, 0.96);
+}
+
+
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(90deg, #020617, #020917);
+    border-bottom: 1px solid rgba(75, 85, 99, 0.9); /* linha neutra/slate */
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(14px);
+  }
+
+  .top-bar {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-logo {
+    height: 40px;
+    width: auto;
+    border-radius: 10px;
+    object-fit: contain;
+    background: transparent;
+    padding: 0;
+    display: block;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .brand-text strong {
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+
+  .brand-text span {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+  }
+
+  .top-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  /* Chip de contexto no topo */
+  .top-chip {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--chip-bg);
+    border: 1px solid rgba(148, 163, 184, 0.6); /* contorno slate */
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-soft);
+    backdrop-filter: blur(8px);
+  }
+
+  .top-chip span {
+    font-size: 0.85rem;
+  }
+
+  /* Chip de status WhatsApp (mantém foco no verde) */
+  .whatsapp-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(34, 197, 94, 0.6);
+    background: linear-gradient(
+      90deg,
+      rgba(34, 197, 94, 0.22),
+      rgba(34, 197, 94, 0.05)
+    );
+    color: #bbf7d0;
+  }
+
+  .whatsapp-mini-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .whatsapp-mini-icon {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    display: block;
+  }
+
+  /* Pontinho verde de status */
+  .whatsapp-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--whatsapp);
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+  }
+
+  /* Layout principal */
+  main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .breadcrumbs a {
+    color: var(--text-soft);
+    text-decoration: none;
+    opacity: 0.85;
+  }
+
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+    opacity: 1;
+    color: var(--accent); /* toque teal ao passar o mouse */
+  }
+
+  /* Hero: texto + card lateral */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.7rem;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    color: var(--text-strong);
+  }
+
+  /* Destaque “Atendimento – problemas de conexão” */
+  .hero-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle at left,
+      var(--accent-soft),
+      transparent 60%
+    );
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+.hero-text p {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  max-width: 520px;
+}
+
+/* Coluna da direita */
+.hero-illu {
+  justify-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Card da hero (bloco explicativo à direita) */
+.hero-card {
+  background: linear-gradient(
+    145deg,
+    rgba(2, 8, 23, 0.98),
+    rgba(2, 12, 27, 0.98)
+  );
+  border-radius: 18px;
+  border: 1px solid rgba(20, 184, 165, 0.337); /* borda em teal (accent) */
+  padding: 16px 18px;
+  max-width: 320px;
+  box-shadow: 0 18px 40px rgba(20, 184, 165, 0.232);
+  font-size: 0.82rem
+}
+
+.hero-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.hero-card-title span {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.hero-card-title strong {
+  font-size: 0.86rem;
+  color: var(--text-strong);
+}
+
+/* Número em destaque dentro do card (ex: passo, prioridade) */
+.hero-card-numero {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent); /* teal */
+}
+
+/* Subtítulo / linha complementar no card da hero */
+.hero-card-sub {
+  margin-top: 6px;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+}
+
+/* Título da seção principal (ex: "Canais de atendimento") */
+.section-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.section-title h2 {
+  font-size: 1.08rem;
+  margin-bottom: 4px;
+  color: var(--text-strong);
+  position: relative;
+}
+
+/* Linha de acento embaixo do título da seção */
+.section-title h2::after {
+  content: "";
+  display: block;
+  margin-top: 3px;
+  width: 40px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent); /* teal */
+}
+
+.section-title span {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+/* Grid de cards de suporte */ 
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* Card de suporte */
+.support-card {
+  background: var(--card-bg);
+  border-radius: 18px;
+  border: 1px solid var(--card-border);
+  padding: 16px 16px 18px;
+  box-shadow: 0 18px 40px rgba(5, 218, 242, 0.137);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pílula no topo do card (ex: "Canal principal", etc.) */
+.support-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  border: 1px solid rgba(20, 184, 166, 0.6); /* contorno teal */
+  color: var(--text-soft);
+}
+
+/* Pontinho em destaque – teal */
+.support-pill-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-soft);
+}
+
+/* Título e textos do card */
+.support-title {
+  font-size: 1rem;
+  color: var(--text-strong);
+  margin-top: 4px;
+}
+
+.support-desc {
+  font-size: 0.86rem;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+/* Bloco de chamada dentro do card */
+.support-callout {
+  font-size: 0.8rem;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(2, 8, 23, 0.96);
+  border: 1px dashed var(--accent); /* teal */
+  color: var(--text-main);
+}
+
+
+/* BOTÃO WHATSAPP*/
+a.whatsapp-btn {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 184, 166, 0.7);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  background: linear-gradient(90deg, var(--accent), #0f766e);
+  color: #ecfeff !important;
+  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.5);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease;
+  box-sizing: border-box;
+}
+
+a.whatsapp-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.7);
+}
+
+a.whatsapp-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+}
+
+/* Botões de ação gerais (não WhatsApp) – teal */
+a.cta-btn {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 184, 166, 0.7);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  background: linear-gradient(90deg, var(--accent), #0f766e);
+  color: #ecfeff !important;
+  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.5);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease;
+  box-sizing: border-box;
+}
+
+a.cta-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.7);
+  text-decoration: none;
+}
+
+a.cta-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+}
+
+/* Ícone dentro dos botões gerais (nPerf, artigo, voltar, etc.) */
+.cta-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.4);
+}
+
+/* Textos dos botões gerais */
+.cta-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.cta-title {
+  font-size: 0.9rem;
+}
+
+.cta-sub {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+/* Mesma largura dos botões dentro dos cards */
+.support-card a.cta-btn,
+.support-card a.whatsapp-btn {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* Seção de voltar para central */
+.section-back {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.section-back a.cta-btn {
+  justify-content: center;
+}
+
+/* Responsivo */
+@media (max-width: 520px) {
+  a.cta-btn,
+  a.whatsapp-btn {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+/* Responsivo para CTAs gerais */
+@media (max-width: 520px) {
+  .cta-btn {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+/* dentro dos cards: todos os blocos verdes com a MESMA largura */
+.support-card .whatsapp-btn {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 18px 40px rgba(38, 105, 63, 0.9);
+}
+
+.whatsapp-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.8);
+}
+
+/* ícone do WhatsApp dentro do botão (caso use imagem em vez de emoji) */
+.whatsapp-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.35);
+}
+
+.whatsapp-icon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* textos dentro do botão */
+.whatsapp-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.whatsapp-title {
+  font-size: 0.9rem;
+}
+
+.whatsapp-sub {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+.whatsapp-nums {
+  font-size: 0.72rem;
+  opacity: 0.9;
+}
+
+/* rodapé do card */
+.support-footer {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* badge com detalhe em teal */
+.support-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  border: 1px solid rgba(20, 184, 166, 0.7); /* accent teal */
+}
+
+.support-tag {
+  opacity: 0.85;
+}
+
+/* footer da página */
+footer {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  padding: 10px 16px 18px;
+  text-align: center;
+  border-top: 1px solid rgba(75, 85, 99, 0.85); /* linha neutra/slate */
+  margin-top: 8px;
+}
+
+footer a {
+  color: var(--text-soft);
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: var(--accent); /* teal no hover */
+}
+
+/* Responsivo */
+@media (max-width: 820px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-illu {
+    justify-content: flex-start;
+  }
+
+  .hero-card {
+    max-width: 100%;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-right {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 520px) {
+  .whatsapp-btn {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .whatsapp-text {
+    text-align: left;
+  }
+}
+</style>
+
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="brand">
+        <img
+          src="imagens/logo-prestek.png"
+          alt="Logo PRESTEK Telecom"
+          class="brand-logo"
+        />
+        <div class="brand-text">
+          <strong>PRESTEK TELECOM</strong>
+          <span>Atendimento – problemas de conexão</span>
+        </div>
+      </div>
+
+      <div class="top-right">
+        <div class="top-chip">
+          <span>⚡</span>
+          <span>Suporte dedicado para incidentes de acesso</span>
+        </div>
+
+        <div class="whatsapp-mini">
+          <span class="whatsapp-mini-text">
+            <img
+              src="imagens/whatsapp.jpg"
+              alt="WhatsApp"
+              class="whatsapp-mini-icon"
+            />
+            0800 900 1014 /
+            <img
+              src="imagens/whatsapp.jpg"
+              alt="WhatsApp"
+              class="whatsapp-mini-icon"
+            />
+            82 3142-9892 – ligações e WhatsApp
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumbs">
+      <a href="index.html">Central de tutoriais</a>
+      <span>›</span>
+      <span>Atendimento – problemas de conexão</span>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-highlight">
+          <span>💬</span>
+          <span>Atendimento humano em poucos cliques</span>
+        </div>
+
+        <h1>Sem acesso ou internet lenta? Fale agora com o nosso time!</h1>
+
+        <p>
+          Quando a conexão não ajuda, a gente entra em ação. Escolha abaixo o
+          tipo de problema que você está enfrentando e clique no botão para ser
+          atendido no WhatsApp pela equipe da PRESTEK.
+        </p>
+      </div>
+
+      <div class="hero-illu">
+        <div class="hero-card">
+          <div class="hero-card-title">
+            <span>Canal oficial de suporte</span>
+            <span class="hero-card-numero">
+              0800 900 1014 / 82 3142-9892
+            </span>
+          </div>
+
+          <p>
+            Esses números são exclusivos para atendimento por ligações e
+            WhatsApp. Utilize sempre que precisar falar com um atendente sobre
+            instabilidade, quedas ou lentidão na sua internet.
+          </p>
+
+          <p class="hero-card-sub">
+            Quanto mais detalhes você enviar, mais rápido conseguimos te ajudar. 😊
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Selecione o problema que melhor descreve a situação</h2>
+        <span>
+          Você será direcionado diretamente para o nosso atendimento via WhatsApp.
+        </span>
+      </div>
+
+      <div class="cards-grid">
+        <!-- Card: Sem acesso -->
+        <article class="support-card">
+          <div class="support-pill">
+            <div class="support-pill-dot"></div>
+            <span>Sem acesso à internet</span>
+          </div>
+
+          <h3 class="support-title">Sem acesso – falar com atendente</h3>
+
+          <p class="support-desc">
+            Se os equipamentos estão ligados, mas você continua totalmente sem
+            navegação, nossos atendentes precisam verificar sua conexão em tempo
+            real.
+          </p>
+
+          <div class="support-callout">
+            🚀 Não se preocupe, a gente resolve! Clique no botão abaixo, conte o
+            que está acontecendo e deixe o resto com o nosso time de suporte. 💚
+          </div>
+
+          <a
+            class="whatsapp-btn"
+            href="https://wa.me/558009001014?text=Ol%C3%A1%20time%20PRESTEK%2C%20estou%20sem%20acesso%20%C3%A0%20internet%20e%20preciso%20de%20ajuda."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="whatsapp-icon">
+              <img src="imagens/whatsapp.jpg" alt="Logo do WhatsApp" />
+            </span>
+
+            <span class="whatsapp-text">
+              <span class="whatsapp-title">Falar com um atendente agora</span>
+              <span class="whatsapp-sub">WhatsApp e ligações:</span>
+              <span class="whatsapp-nums">
+                82 3142-9892<br />
+                0800 900 1014
+              </span>
+            </span>
+          </a>
+
+          <div class="support-footer">
+            <span class="support-badge">Prioridade: alta</span>
+            <span class="support-tag">Sem conexão total</span>
+          </div>
+        </article>
+
+        <!-- Card: Internet lenta -->
+        <article class="support-card">
+          <div class="support-pill">
+            <div class="support-pill-dot"></div>
+            <span>Internet lenta ou instável</span>
+          </div>
+
+          <h3 class="support-title">Internet lenta – falar com atendente</h3>
+
+          <p class="support-desc">
+            Páginas demorando para abrir, vídeos travando ou quedas constantes na
+            conexão? Nosso time pode analisar a sua rota, sinal e possíveis
+            oscilações.
+          </p>
+
+          <div class="support-callout">
+            🌟 Não aceite uma internet devagarinho! Fale com a gente no WhatsApp
+            e vamos turbinar a sua conexão juntos. 🚀
+          </div>
+
+          <a
+            class="whatsapp-btn"
+            href="https://wa.me/558009001014?text=Ol%C3%A1%20time%20PRESTEK%2C%20minha%20internet%20est%C3%A1%20lenta%20e%20preciso%20de%20ajuda."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="whatsapp-icon">
+              <img src="imagens/whatsapp.jpg" alt="Logo do WhatsApp" />
+            </span>
+
+            <span class="whatsapp-text">
+              <span class="whatsapp-title">Falar com um atendente agora</span>
+              <span class="whatsapp-sub">WhatsApp e ligações:</span>
+              <span class="whatsapp-nums">
+                82 3142-9892<br />
+                0800 900 1014
+              </span>
+            </span>
+          </a>
+
+          <div class="support-footer">
+            <span class="support-badge">Prioridade: média/alta</span>
+            <span class="support-tag">Lentidão / oscilação</span>
+          </div>
+        </article>
+
+        <!-- Card: Pagamento de boleto -->
+        <article class="support-card">
+          <div class="support-pill">
+            <div class="support-pill-dot"></div>
+            <span>2ª via e pagamento de boleto</span>
+          </div>
+
+          <h3 class="support-title">Quero pagar meu boleto</h3>
+
+          <p class="support-desc">
+            Precisa emitir a 2ª via ou realizar o pagamento do seu boleto PRESTEK?
+            Você pode fazer tudo on-line, com segurança, em poucos cliques, pela
+            nossa Central do Assinante.
+          </p>
+
+          <div class="support-callout">
+            💚 Deixe o papel de lado e resolva tudo sem fila e sem ligação!
+            Acesse a Central do Assinante, gere seu boleto na hora e mantenha sua
+            conexão sempre em dia. 😉
+          </div>
+
+          <a
+            class="cta-btn"
+            href="https://assine.prestek.com.br/boleto"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="cta-icon">💳</span>
+
+            <span class="cta-text">
+              <span class="cta-title">Acessar Central do Assinante</span>
+              <span class="cta-sub">2ª via e pagamento on-line</span>
+            </span>
+          </a>
+
+          <div class="support-footer">
+            <span class="support-badge">Autoatendimento</span>
+            <span class="support-tag">2ª via / pagamento de fatura</span>
+          </div>
+        </article>
+
+        <!-- Card: Testar velocidade -->
+        <article class="support-card">
+          <div class="support-pill">
+            <div class="support-pill-dot"></div>
+            <span>Teste de velocidade</span>
+          </div>
+
+          <h3 class="support-title">Como testar a velocidade corretamente</h3>
+
+          <p class="support-desc">
+            Quer saber se a sua internet está entregando a velocidade contratada?
+            Use um teste confiável e acompanhe o desempenho da sua conexão em
+            tempo real.
+          </p>
+
+          <div class="support-callout">
+            🚀 Em poucos segundos você confere se a sua conexão está dentro do esperado.
+            Faça o teste e, se o resultado ficar abaixo do contratado, salve o
+            resultado e fale com o nosso time. 💚
+          </div>
+
+          <a
+            class="cta-btn"
+            href="https://www.nperf.com/pt/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="cta-icon">📈</span>
+            <span class="cta-text">
+              <span class="cta-title">Acessar teste de velocidade</span>
+              <span class="cta-sub">Ferramenta nPerf (abre em nova aba)</span>
+            </span>
+          </a>
+
+          <div class="support-footer">
+            <span class="support-badge">Ferramenta externa</span>
+            <span class="support-tag">Diagnóstico de velocidade</span>
+          </div>
+        </article>
+
+        <!-- Card: Diferença 2.4G x 5G -->
+        <article class="support-card">
+          <div class="support-pill">
+            <div class="support-pill-dot"></div>
+            <span>Diferença entre redes Wi-Fi</span>
+          </div>
+
+          <h3 class="support-title">Diferença entre 2.4G e 5G</h3>
+
+          <p class="support-desc">
+            Fica em dúvida sobre qual rede Wi-Fi usar, 2.4 GHz ou 5 GHz?
+            Entender essa diferença ajuda a ter mais alcance, estabilidade
+            e desempenho nos seus dispositivos.
+          </p>
+
+          <div class="support-callout">
+            📡 Descubra qual rede é a parceira ideal para cada cômodo e para cada
+            tipo de uso (streaming, jogos, reuniões on-line...). Informação simples
+            que faz a sua internet render muito mais. 😉
+          </div>
+
+          <a
+            class="cta-btn"
+            href="https://www.intel.com.br/content/www/br/pt/products/docs/wireless/2-4-vs-5ghz.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="cta-icon">📚</span>
+            <span class="cta-text">
+              <span class="cta-title">Entender 2.4G x 5G</span>
+              <span class="cta-sub">Artigo explicativo</span>
+            </span>
+          </a>
+
+          <div class="support-footer">
+            <span class="support-badge">Conteúdo educativo</span>
+            <span class="support-tag">Wi-Fi 2.4 GHz / 5 GHz</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-back">
+      <a href="index.html" class="cta-btn">
+        <span class="cta-icon">🏠</span>
+        <span class="cta-text">
+          <span class="cta-title">Voltar para a Central de Tutoriais</span>
+          <span class="cta-sub">Página principal de tutoriais</span>
+        </span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    Página interna de apoio ao cliente PRESTEK TELECOM.
+    Voltar para a
+    <a href="index.html">Central de Tutoriais</a>.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Central de Tutoriais - PRESTEK Telecom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  color-scheme: light;
+
+  /* Azul principal (títulos, botões, links) */
+  --accent-blue: #1d4ed8;
+
+  /* Vermelho-violeta para detalhes */
+  --accent-orange: #e11d48;
+
+  /* Fundo geral e cards */
+  --color-bg: #f3f5ff;
+  --color-bg-soft: #ffffff;
+  --color-header: #ffffff;
+  --color-text: #0f172a;
+  --color-text-soft: #6b7280;
+
+  --color-border: #e5e7eb;
+  --color-card-bg: #ffffff;
+  --color-card-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+
+  --color-tag-bg: rgba(37, 99, 235, 0.06);
+
+  --color-search-bg: #ffffff;
+  --color-search-border: #cbd5f5;
+  --color-search-placeholder: #9ca3af;
+
+  --color-badge-bg: rgba(15, 23, 42, 0.04);
+}
+
+:root.dark-theme {
+  color-scheme: dark;
+
+  /* Fundo geral – azul escuro com brilho suave no topo */
+  --color-bg: radial-gradient(
+    circle at top,
+    #0b2948 0,
+    #061525 45%,
+    #020617 100%
+  );
+
+  /* Superfícies e seções internas */
+  --color-bg-soft: #020b16;
+  --color-header: linear-gradient(90deg, #061525, #020617);
+
+  /* Textos */
+  --color-text: #e5e7eb;
+  --color-text-soft: #94a3b8;
+
+  /* Bordas e contornos */
+  --color-border: rgba(30, 64, 175, 0.45);
+
+  /* Cards */
+  --color-card-bg: #020b16;
+  --color-card-shadow: 0 22px 50px rgba(3, 7, 18, 0.95);
+
+  /* Tags / chips */
+  --color-tag-bg: rgba(34, 193, 214, 0.12);
+
+  /* Busca */
+  --color-search-bg: #020819;
+  --color-search-border: #1e293b;
+  --color-search-placeholder: #64748b;
+
+  /* Badges / selos pequenos */
+  --color-badge-bg: rgba(9, 16, 35, 0.96);
+
+  /* Acentos (links, botões, detalhes) */
+  --accent-blue: #22c1d6;   /* ciano/teal tech */
+  --accent-orange: #facc6b; /* toque quente para detalhes */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+/* HEADER / TOPO */
+header {
+  background: var(--color-header);
+  color: #f9fafb;
+  padding: 12px 24px;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.4);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.top-bar {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+  border-radius: 10px;
+  padding: 0;
+  background: transparent;
+  display: block;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  color: #e5e7eb;
+}
+
+.brand-text strong {
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.brand-text span {
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.top-badge {
+  font-size: 0.78rem;
+  background: rgba(15, 23, 42, 0.35);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.65);
+  white-space: nowrap;
+  color: #e5e7eb;
+  backdrop-filter: blur(8px);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.5);
+  color: #e5e7eb;
+  font-size: 0.78rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(226, 232, 240, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.65);
+}
+
+.theme-icon {
+  font-size: 0.98rem;
+}
+
+main {
+  max-width: 1120px;
+  margin: 24px auto 40px;
+  padding: 0 16px 40px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.feedback-section {
+  max-width: 1120px;
+  margin: 0 auto 18px;
+  padding: 0 16px;
+}
+
+.feedback-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--color-card-shadow);
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+:root.dark-theme .feedback-inner {
+  background: var(--color-card-bg);
+  border-color: var(--color-border);
+  box-shadow: var(--color-card-shadow);
+}
+
+.feedback-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.feedback-question {
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+:root.dark-theme .feedback-question {
+  color: var(--color-text);
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.feedback-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.85);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  background: rgba(248, 250, 252, 0.96);
+  color: #020617;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease;
+}
+
+/* DARK: usa fundo suave do tema, borda padrão */
+:root.dark-theme .feedback-btn {
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.feedback-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-blue);
+  background: rgba(239, 246, 255, 0.98);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+
+/* DARK: hover com leve brilho em torno do teal */
+:root.dark-theme .feedback-btn:hover {
+  background: rgba(34, 193, 214, 0.14);
+  border-color: var(--accent-blue);
+  box-shadow: 0 6px 16px rgba(34, 193, 214, 0.4);
+}
+
+.feedback-btn.is-active {
+  background: var(--accent-blue);
+  color: #f9fafb;
+  border-color: var(--accent-blue);
+  box-shadow: 0 8px 18px rgba(34, 193, 214, 0.4);
+}
+
+.feedback-message {
+  font-size: 0.78rem;
+  color: var(--color-text-soft);
+  min-height: 1em;
+}
+
+.feedback-extra {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+.feedback-extra label {
+  color: var(--color-text-soft);
+}
+
+.feedback-textarea {
+  width: 100%;
+  min-height: 70px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  resize: vertical;
+  outline: none;
+  background: var(--color-card-bg);
+  color: var(--color-text);
+}
+
+/* DARK: usa o bg-soft para integrar com o resto do tema */
+:root.dark-theme .feedback-textarea {
+  background: var(--color-bg-soft);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.feedback-textarea:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(34, 193, 214, 0.25);
+}
+
+.feedback-send {
+  align-self: flex-end;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.85);
+  background: rgba(239, 246, 255, 0.96);
+  color: #111827;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease;
+}
+
+/* DARK: botão mais discreto, contorno teal */
+:root.dark-theme .feedback-send {
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  border-color: var(--accent-blue);
+}
+
+.feedback-send:hover {
+  transform: translateY(-1px);
+  background: rgba(219, 234, 254, 0.98);
+  box-shadow: 0 8px 16px rgba(37, 99, 235, 0.25);
+}
+
+/* DARK: hover com overlay teal */
+:root.dark-theme .feedback-send:hover {
+  background: rgba(34, 193, 214, 0.2);
+  box-shadow: 0 8px 20px rgba(34, 193, 214, 0.45);
+}
+
+@media (max-width: 640px) {
+  .feedback-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feedback-question {
+    white-space: normal;
+  }
+
+  .feedback-send {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* BADGE DO TOPO NO DARK */
+:root.dark-theme .top-badge {
+  background: var(--color-badge-bg);
+  border-color: var(--color-border);
+  color: var(--accent-blue);
+}
+
+/* BOTÃO DE TEMA NO DARK */
+:root.dark-theme .theme-toggle {
+  background: rgba(9, 16, 35, 0.96);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+:root.dark-theme .theme-toggle:hover {
+  background: rgba(9, 16, 35, 1);
+  border-color: var(--accent-blue);
+}
+
+/* HERO / TAG / DESTAQUES */
+
+@media (max-width: 880px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-text {
+  padding: 24px 24px;
+  border-radius: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(241, 245, 249, 0.96)
+  );
+  box-shadow: var(--color-card-shadow);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+/* DARK: card mais sólido, sem borda dourada */
+:root.dark-theme .hero-text {
+  background: linear-gradient(
+    135deg,
+    rgba(3, 12, 24, 0.98),
+    rgba(4, 16, 30, 0.96)
+  );
+  border-color: var(--color-border);
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-tag-bg);
+  color: var(--accent-blue);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* DARK: badge alinhada ao tema oceano (sem dourado) */
+:root.dark-theme .hero-tag {
+  background: var(--color-badge-bg);
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.hero-tag span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
+}
+
+/* DARK: pontinho teal */
+:root.dark-theme .hero-tag span {
+  background: var(--accent-blue);
+  box-shadow: 0 0 0 4px rgba(34, 193, 214, 0.45);
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 3.1vw, 2.25rem);
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.hero p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: var(--color-text-soft);
+}
+
+.hero-highlight {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}
+
+.hero-highlight span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+}
+
+/* DARK: chips discretos, com contorno de slate */
+:root.dark-theme .hero-highlight span {
+  background: var(--color-badge-bg);
+  border: 1px solid var(--color-border);
+}
+
+.hero-highlight span::before {
+  content: "•";
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+.hero-bottom {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.45);
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    background 0.14s ease,
+    border-color 0.14s ease;
+}
+
+/* DARK: CTA principal teal, sem dourado */
+:root.dark-theme .hero-button {
+  background: linear-gradient(135deg, var(--accent-blue), #0f766e);
+  color: #e5e7eb;
+  border-color: rgba(34, 193, 214, 0.8);
+  box-shadow: 0 14px 32px rgba(15, 118, 110, 0.6);
+}
+
+.hero-button:hover {
+  transform: translateY(-1.5px);
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.55);
+}
+
+/* DARK: hover com mais brilho teal */
+:root.dark-theme .hero-button:hover {
+  background: linear-gradient(135deg, #3dd5e4, var(--accent-blue));
+  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.75);
+}
+
+.hero-button span {
+  font-size: 0.95rem;
+}
+
+.hero-button-secondary {
+  background: transparent;
+  color: var(--accent-blue);
+  border: 1px solid rgba(37, 99, 235, 0.55);
+  box-shadow: none;
+}
+
+.hero-button-secondary:hover {
+  background: rgba(37, 99, 235, 0.06);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
+}
+
+/* DARK: secundário mais discreto, usando o fundo do tema */
+:root.dark-theme .hero-button-secondary {
+  background: transparent;
+  color: var(--accent-blue);
+  border-color: rgba(34, 193, 214, 0.7);
+}
+
+:root.dark-theme .hero-button-secondary:hover {
+  background: rgba(34, 193, 214, 0.08);
+  box-shadow: 0 10px 26px rgba(34, 193, 214, 0.4);
+}
+
+.hero-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-soft);
+}
+
+.hero-meta strong {
+  color: var(--color-text);
+}
+
+.hero-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-illustration-inner {
+  position: relative;
+  width: min(310px, 72vw);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0; 
+}
+
+.hero-badge-floating {
+  display: none;
+}
+
+.hero-badge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.35);
+}
+
+/* Se quiser deixar esse ponto em teal no dark também: */
+:root.dark-theme .hero-badge-dot {
+  background: var(--accent-blue);
+  box-shadow: 0 0 0 5px rgba(34, 193, 214, 0.4);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  margin-top: 6px;
+}
+
+.toolbar-left {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  line-height: 1.4;
+}
+
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 340px;
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 9px 32px 9px 32px;
+  border-radius: 999px;
+  border: 1px solid var(--color-search-border);
+  background: var(--color-search-bg);
+  font-size: 0.85rem;
+  outline: none;
+  transition:
+    border 0.14s ease,
+    box-shadow 0.14s ease,
+    background 0.14s ease,
+    transform 0.08s ease;
+  color: var(--color-text);
+}
+
+.search-input::placeholder {
+  color: var(--color-search-placeholder);
+}
+
+.search-input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  background: var(--color-search-bg);
+  transform: translateY(-1px);
+}
+
+/* DARK: já estava coerente, só usa sombra teal */
+:root.dark-theme .search-input:focus {
+  box-shadow: 0 0 0 3px rgba(34, 193, 214, 0.35);
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.88rem;
+  opacity: 0.6;
+}
+
+.search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  opacity: 0.55;
+  cursor: pointer;
+  display: none;
+}
+
+.search-clear.visible {
+  display: block;
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+  margin-top: 4px;
+}
+
+.section-title h2 {
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.section-title h2::after {
+  content: "";
+  display: block;
+  margin-top: 3px;
+  width: 40px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.7);
+}
+
+/* DARK: linha de seção em teal, não mais laranja */
+:root.dark-theme .section-title h2::after {
+  background: var(--accent-blue);
+}
+
+.section-title span {
+  font-size: 0.78rem;
+  color: var(--color-text-soft);
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.video-card {
+  background: var(--color-card-bg);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--color-card-shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+:root.dark-theme .video-card {
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.video-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.3);
+  border-color: var(--accent-blue); 
+}
+
+/* DARK: destaque em teal no hover, sem dourado */
+:root.dark-theme .video-card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 20px 42px rgba(3, 7, 18, 0.95);
+}
+
+.video-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.video-thumb-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.video-card:hover .video-thumb {
+  transform: scale(1.04);
+}
+
+.video-play-pill {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.9);
+  color: #f9fafb;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.5);
+}
+
+.video-play-pill span {
+  font-size: 0.85rem;
+}
+
+.video-body {
+  padding: 11px 13px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.video-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  opacity: 0.95;
+}
+
+.video-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.video-description {
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.video-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 0.74rem;
+  color: #9ca3af;
+}
+
+:root.dark-theme .video-meta {
+  color: #6b7280;
+}
+
+.video-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-new {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.08); 
+  color: #1d4ed8;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* DARK: badge de “novo” em teal */
+:root.dark-theme .badge-new {
+  background: rgba(34, 193, 214, 0.16);
+  color: var(--accent-blue);
+  border: 1px solid rgba(34, 193, 214, 0.7);
+}
+
+.empty-state {
+  margin-top: 16px;
+  padding: 16px 14px;
+  border-radius: 16px;
+  border: 1px dashed var(--color-border);
+  background: var(--color-card-bg);
+  font-size: 0.86rem;
+  color: var(--color-text-soft);
+  box-shadow: var(--color-card-shadow);
+}
+
+:root.dark-theme .empty-state {
+  background: var(--color-card-bg);
+  border-color: var(--color-border);
+}
+
+.empty-state strong {
+  color: var(--color-text);
+}
+
+footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px 26px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+:root.dark-theme footer {
+  color: var(--color-text-soft);
+  border-top-color: var(--color-border);
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* DARK: link em teal no hover, não mais laranja */
+:root.dark-theme footer a:hover {
+  color: var(--accent-blue);
+}
+
+@media (max-width: 640px) {
+  header {
+    padding-inline: 16px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hero-text {
+    padding: 18px 16px;
+  }
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  /* Fundo do loading com a mesma vibe "Slate Ocean" */
+  background: radial-gradient(
+    circle at top,
+    rgba(11, 41, 72, 0.97),
+    #020617 70%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.loading-overlay.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.loading-spinner {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 3px solid rgba(148, 163, 184, 0.5);
+  border-top-color: var(--accent-blue); 
+  animation: spinner-rotate 0.8s linear infinite;
+  margin-bottom: 10px;
+}
+
+.loading-text {
+  font-size: 0.8rem;
+  color: #e5e7eb;
+  opacity: 0.9;
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ================= LIGHT THEME OVERRIDES ================= */
+
+:root:not(.dark-theme) header {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 0 #e5e7eb;
+}
+
+:root:not(.dark-theme) .brand-text {
+  color: #0f172a;
+}
+
+:root:not(.dark-theme) .brand-text span {
+  opacity: 0.7;
+}
+
+:root:not(.dark-theme) .top-badge {
+  background: #ffffff;
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+}
+
+:root:not(.dark-theme) .theme-toggle {
+  background: #ffffff;
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+}
+
+:root:not(.dark-theme) .theme-toggle:hover {
+  background: #eef2ff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+
+:root:not(.dark-theme) .hero-text {
+  background: #f8fbff;
+  border-color: #e5e7eb;
+}
+
+:root:not(.dark-theme) .hero-highlight span::before {
+  color: var(--accent-orange);
+}
+
+:root:not(.dark-theme) .badge-new {
+  background: rgba(225, 29, 72, 0.08);
+  color: #be123c;
+  border: 1px solid rgba(225, 29, 72, 0.25);
+}
+
+:root:not(.dark-theme) .section-title h2::after {
+  background: #1d4ed8;
+}
+
+:root:not(.dark-theme) body {
+  background: #f5f7ff;
+}
+
+:root:not(.dark-theme) .hero-text {
+  background: #f8fbff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+}
+
+:root:not(.dark-theme) .hero-tag {
+  background: #eef2ff;
+  color: #1d4ed8;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+:root:not(.dark-theme) .hero-tag span {
+  background: #e11d48; 
+  box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.18);
+}
+
+:root:not(.dark-theme) .hero-highlight span {
+  background: #e5edff;
+  border-radius: 999px;
+}
+
+:root:not(.dark-theme) .hero-highlight span::before {
+  color: #e11d48;
+}
+
+:root:not(.dark-theme) .hero-button {
+  background: #111827;
+  border-color: #111827;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.25);
+}
+
+:root:not(.dark-theme) .hero-button:hover {
+  background: #020617;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.35);
+}
+
+:root:not(.dark-theme) .hero-button.hero-button-secondary {
+  background: transparent;
+  color: #111827;
+  border-color: #111827;
+  box-shadow: none;
+}
+
+:root:not(.dark-theme) .hero-button.hero-button-secondary:hover {
+  background: #e5edff;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.15);
+}
+
+:root:not(.dark-theme) .search-input {
+  background: #ffffff;
+  border-color: #cbd5f5;
+}
+
+:root:not(.dark-theme) .search-input:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+}
+
+:root:not(.dark-theme) .video-card {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  position: relative;
+}
+
+:root:not(.dark-theme) .video-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 3px;
+  background: #1d4ed8;
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+:root:not(.dark-theme) .video-card:hover {
+  border-color: #111827;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+:root:not(.dark-theme) .video-card:hover::before {
+  opacity: 1;
+}
+
+:root:not(.dark-theme) .video-category {
+  color: #1d4ed8;
+}
+
+:r
+
+  </style>
+</head>
+
+<body>
+  <!-- Overlay de carregamento -->
+  <div id="pageLoader" class="loading-overlay is-visible" aria-hidden="false">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Carregando PRESTEK...</div>
+  </div>
+
+  <header>
+    <div class="top-bar">
+      <div class="brand">
+        <img src="imagens/prestek-telecom2.jpg" alt="Logo Prestek Telecom" class="brand-logo" />
+        <div class="brand-text">
+          <span>Central de tutoriais internos</span>
+        </div>
+      </div>
+      <div class="top-right">
+        <div class="top-badge">
+          Tutoriais de processos • IXC Soft
+        </div>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
+          <span class="theme-icon" aria-hidden="true">🌞</span>
+          <span class="theme-label">Modo claro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-tag">
+          <span></span>
+          Página interna • Tutoriais PRESTEK + Atendimento
+        </div>
+
+        <h1>Ana Ajuda! – Prestek Telecom</h1>
+
+        <p>
+          Nesta página, reunimos vídeos rápidos com passo a passo para resolver
+          os principais problemas do dia a dia dos nossos <strong>clientes</strong>, como
+          falhas de rede, falta de acesso, suporte, questões financeiras e muito mais.
+        </p>
+
+        <div class="hero-highlight">
+          <span>Vídeos curtinhos e direto ao ponto</span>
+          <span>Focado na rotina real da operação</span>
+          <span>Acesso prático via YouTube</span>
+        </div>
+
+        <div class="hero-bottom">
+          <div class="hero-actions">
+            <a href="#videos" class="hero-button">
+              <span>⏵</span> Ver tutoriais em vídeo
+            </a>
+
+            <a
+              href="atendimento-whatsapp.html"
+              class="hero-button hero-button-secondary"
+            >
+              <span>🛟</span> Atendimento – problemas de conexão
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <strong>Dica:</strong> use o campo de busca para encontrar
+            rapidamente o procedimento que precisa.
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-illustration">
+        <div class="hero-illustration-inner">
+          <img
+            src="imagens/prestek-telecom2.jpg"
+            alt="Mascote da PRESTEK Telecom usando headset"
+            class="hero-image"
+          />
+          <div class="hero-badge-floating">
+            <div class="hero-badge-dot"></div>
+            Suporte disponível 24h
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="toolbar-left">
+        Selecione um vídeo abaixo ou pesquise pelo nome do processo, módulo ou palavra-chave.
+      </div>
+
+      <div class="search-wrapper">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          id="searchInput"
+          type="search"
+          class="search-input"
+          placeholder="Buscar por módulo, processo ou palavra-chave..."
+          autocomplete="off"
+        />
+        <span id="searchClear" class="search-clear" aria-hidden="true">✕</span>
+      </div>
+    </section>
+
+    <section id="videos">
+      <div class="section-title">
+        <h2>Tutoriais em vídeo</h2>
+        <span id="videoCount"></span>
+      </div>
+
+      <div id="videosGrid" class="videos-grid"></div>
+
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <strong>Nenhum vídeo encontrado.</strong> Ajuste os termos da busca ou
+        limpe o campo de pesquisa para ver todos os tutoriais novamente.
+      </div>
+    </section>
+
+    <section class="feedback-section" aria-label="Feedback do conteúdo">
+      <div class="feedback-inner">
+        <div class="feedback-top">
+          <span class="feedback-question">Esse conteúdo foi útil?</span>
+
+          <div class="feedback-buttons">
+            <button type="button" class="feedback-btn" data-feedback="yes">
+              👍 <span>Sim, ajudou</span>
+            </button>
+            <button type="button" class="feedback-btn" data-feedback="no">
+              👎 <span>Pode melhorar</span>
+            </button>
+          </div>
+        </div>
+
+        <p
+          class="feedback-message"
+          id="feedbackMessage"
+          aria-live="polite"
+        ></p>
+
+        <div class="feedback-extra">
+          <label for="feedbackText">
+            Quer deixar uma sugestão ou comentário? (opcional)
+          </label>
+          <textarea
+            id="feedbackText"
+            class="feedback-textarea"
+            placeholder="Conte rapidamente o que podemos melhorar ou o que mais gostou deste conteúdo..."
+          ></textarea>
+          <button type="button" class="feedback-send" id="feedbackSend">
+            Enviar opinião
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> PRESTEK TELECOM</span>
+  </footer>
+
+  <script>
+    const videos = [
+      {
+        titulo: "Sem acesso à internet – como conferir",
+        descricao:
+          "Passos básicos para conferir cabeamento, modem/roteador e verificar se o problema é interno ou na operadora antes de acionar o suporte.",
+        categoria: "Sem acesso",
+        duracao: "≈ 3 min",
+        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_SEM_ACESSO",
+        imageUrl: "imagens/mascote-prestek.jpg",
+        novo: true,
+      },
+      {
+        titulo: "Internet lenta – como conferir",
+        descricao:
+          "Como identificar possíveis causas de lentidão (Wi-Fi, cabo, quantidade de dispositivos, testes simples) antes de abrir chamado.",
+        categoria: "Internet lenta",
+        duracao: "≈ 4 min",
+        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_INTERNET_LENTA",
+        imageUrl: "imagens/mascote-prestek.jpg",
+        novo: true,
+      },
+      {
+        titulo: "Como testar a velocidade corretamente",
+        descricao:
+          "Tutorial mostrando como fazer o teste de velocidade, boas práticas para medir e como interpretar download, upload e ping.",
+        categoria: "Teste de velocidade",
+        duracao: "≈ 5 min",
+        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_TESTE_VELOCIDADE",
+        imageUrl: "imagens/mascote-prestek.jpg",
+        novo: false,
+      },
+      {
+        titulo: "Diferença entre rede 2.4G e 5G",
+        descricao:
+          "Explicação sobre alcance, velocidade e em quais situações usar 2.4 GHz ou 5 GHz para melhorar a experiência de Wi-Fi do cliente.",
+        categoria: "Wi-Fi / Redes",
+        duracao: "≈ 6 min",
+        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_24G_5G",
+        imageUrl: "imagens/mascote-prestek.jpg",
+        novo: false,
+      },
+      {
+        titulo: "Acessar boletos e 2ª via – Central do Assinante",
+        descricao:
+          "Passo a passo para o cliente gerar 2ª via do boleto, copiar código de barras e realizar o pagamento pela Central do Assinante PRESTEK.",
+        categoria: "Financeiro / Boletos",
+        duracao: "≈ 3 min",
+        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_BOLETOS",
+        imageUrl: "imagens/mascote-prestek.jpg",
+        novo: true,
+      },
+    ];
+
+    const videosGrid = document.getElementById("videosGrid");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const searchClear = document.getElementById("searchClear");
+    const videoCount = document.getElementById("videoCount");
+
+    const themeToggleBtn = document.getElementById("themeToggle");
+    const themeIcon = themeToggleBtn
+      ? themeToggleBtn.querySelector(".theme-icon")
+      : null;
+    const themeLabel = themeToggleBtn
+      ? themeToggleBtn.querySelector(".theme-label")
+      : null;
+
+    function renderVideos(lista) {
+      videosGrid.innerHTML = "";
+
+      if (!lista.length) {
+        emptyState.style.display = "block";
+        videoCount.textContent = "(0 vídeos)";
+        return;
+      }
+
+      emptyState.style.display = "none";
+      videoCount.textContent =
+        lista.length === 1
+          ? "(1 vídeo disponível)"
+          : `(${lista.length} vídeos disponíveis)`;
+
+      lista.forEach((video) => {
+        const card = document.createElement("article");
+        card.className = "video-card";
+
+        card.innerHTML = `
+          <a href="${video.driveUrl}"
+             class="video-link"
+             target="_blank"
+             rel="noopener noreferrer">
+            <div class="video-thumb-wrapper">
+              <img src="${video.imageUrl}"
+                   alt="Thumb do vídeo: ${video.titulo}"
+                   class="video-thumb" />
+              <div class="video-play-pill">
+                <span>⏵</span> Assistir no YouTube
+              </div>
+            </div>
+            <div class="video-body">
+              <div class="video-category">
+                ${video.categoria || "Tutorial PRESTEK"}
+              </div>
+              <h3 class="video-title">${video.titulo}</h3>
+              <p class="video-description">${video.descricao}</p>
+              <div class="video-meta">
+                <span>⏱ ${video.duracao || "N/D"}</span>
+                <span>
+                  ${
+                    video.novo
+                      ? `<span class="badge-new">Novo</span>`
+                      : "IXC Soft na prática"
+                  }
+                </span>
+              </div>
+            </div>
+          </a>
+        `;
+
+        videosGrid.appendChild(card);
+      });
+    }
+
+    function filtrarVideos(termo) {
+      const termoNormalizado = termo.trim().toLowerCase();
+
+      if (!termoNormalizado) {
+        searchClear.classList.remove("visible");
+        renderVideos(videos);
+        return;
+      }
+
+      searchClear.classList.add("visible");
+
+      const filtrados = videos.filter((video) => {
+        return (
+          video.titulo.toLowerCase().includes(termoNormalizado) ||
+          video.descricao.toLowerCase().includes(termoNormalizado) ||
+          (video.categoria &&
+            video.categoria.toLowerCase().includes(termoNormalizado))
+        );
+      });
+
+      renderVideos(filtrados);
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        filtrarVideos(e.target.value);
+      });
+    }
+
+    if (searchClear) {
+      searchClear.addEventListener("click", () => {
+        searchInput.value = "";
+        filtrarVideos("");
+        searchInput.focus();
+      });
+    }
+
+    // ano no rodapé
+    const yearSpan = document.getElementById("year");
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Tema claro / escuro
+    function applyTheme(theme) {
+      const root = document.documentElement;
+
+      if (theme === "dark") {
+        root.classList.add("dark-theme");
+      } else {
+        root.classList.remove("dark-theme");
+      }
+
+      localStorage.setItem("prestek-theme", theme);
+
+      const isDark = root.classList.contains("dark-theme");
+      if (themeIcon && themeLabel) {
+        themeIcon.textContent = isDark ? "🌙" : "🌞";
+        themeLabel.textContent = isDark ? "Modo escuro" : "Modo claro";
+      }
+    }
+
+    (function initTheme() {
+      const storedTheme = localStorage.getItem("prestek-theme");
+      if (storedTheme) {
+        applyTheme(storedTheme);
+      } else {
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        applyTheme(prefersDark ? "dark" : "light");
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+          const isDark =
+            document.documentElement.classList.contains("dark-theme");
+          applyTheme(isDark ? "light" : "dark");
+        });
+      }
+    })();
+
+    // Render inicial dos vídeos
+    renderVideos(videos);
+
+    // Feedback "Esse conteúdo foi útil?"
+    const feedbackButtons = document.querySelectorAll(".feedback-btn");
+    const feedbackMessage = document.getElementById("feedbackMessage");
+    const feedbackText = document.getElementById("feedbackText");
+    const feedbackSend = document.getElementById("feedbackSend");
+    let feedbackChoice = null;
+
+    feedbackButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tipo = btn.dataset.feedback;
+        feedbackChoice = tipo;
+
+        feedbackButtons.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+
+        if (!feedbackMessage) return;
+
+        if (tipo === "yes") {
+          feedbackMessage.textContent =
+            "Obrigado! Sua opinião ajuda a melhorar nossos tutoriais. 💚";
+        } else {
+          feedbackMessage.textContent =
+            "Obrigado pelo retorno! Vamos usar seu feedback para melhorar este conteúdo. 🙂";
+        }
+      });
+    });
+
+    if (feedbackSend) {
+      feedbackSend.addEventListener("click", async () => {
+        if (!feedbackMessage) return;
+
+        const comentario = feedbackText ? feedbackText.value.trim() : "";
+
+        if (!feedbackChoice && !comentario) {
+          feedbackMessage.textContent =
+            "Por favor, selecione se o conteúdo foi útil ou escreva um comentário antes de enviar.";
+          return;
+        }
+
+        const dados = new URLSearchParams();
+        dados.append("util", feedbackChoice || "");
+        dados.append("mensagem", comentario);
+        dados.append(
+          "pagina",
+          window.location.pathname.split("/").pop() || "index.html"
+        );
+
+        try {
+          const resposta = await fetch("salvar_feedback.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: dados.toString(),
+          });
+
+          if (resposta.ok) {
+            feedbackMessage.textContent =
+              "Obrigado! Seu feedback foi enviado com sucesso. 💚";
+            if (feedbackText) feedbackText.value = "";
+          } else {
+            feedbackMessage.textContent =
+              "Não foi possível enviar o feedback agora. Tente novamente mais tarde.";
+          }
+        } catch (erro) {
+          feedbackMessage.textContent =
+            "Não foi possível enviar o feedback agora. Verifique sua conexão e tente novamente.";
+        }
+      });
+    }
+
+    // Loader da página (overlay de carregamento)
+    const pageLoader = document.getElementById("pageLoader");
+
+    window.addEventListener("load", () => {
+      if (pageLoader) {
+        pageLoader.classList.remove("is-visible");
+        pageLoader.setAttribute("aria-hidden", "true");
+      }
+    });
+
+    function setupLinkLoader() {
+      if (!pageLoader) return;
+
+      const links = document.querySelectorAll(
+        'a[href$=".html"]:not([data-no-loader])'
+      );
+
+      links.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const url = link.getAttribute("href");
+
+          if (
+            !url ||
+            url.startsWith("#") ||
+            e.ctrlKey ||
+            e.metaKey ||
+            e.shiftKey ||
+            e.altKey ||
+            link.target === "_blank"
+          ) {
+            return;
+          }
+
+          e.preventDefault();
+
+          pageLoader.classList.add("is-visible");
+          pageLoader.removeAttribute("aria-hidden");
+
+          setTimeout(() => {
+            window.location.href = url;
+          }, 250);
+        });
+      });
+    }
+
+    setupLinkLoader();
+  </script>
+</body>
+</html>
