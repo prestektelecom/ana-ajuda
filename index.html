@@ -22,7 +22,7 @@
   --color-bg: #f3f5ff;
   --color-bg-soft: #ffffff;
   --color-header: #ffffff;
-  --color-text: #0f172a;
+  --color-text: #140f94;
   --color-text-soft: #6b7280;
 
   --color-border: #e5e7eb;
@@ -121,12 +121,11 @@ header {
 }
 
 .brand-logo {
-  height: 40px;
+  height: 32px;
   width: auto;
-  border-radius: 10px;
-  padding: 0;
-  background: transparent;
   display: block;
+  filter: none !important;        /* mantém o laranja original */
+  mix-blend-mode: normal;        /* não mistura com o fundo */
 }
 
 .brand-text {
@@ -503,9 +502,10 @@ main {
 .hero-highlight {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 12px;
+  gap: 10px 16px;         
   font-size: 0.8rem;
   color: var(--color-text-soft);
+  margin: 16px 0 8px;    
 }
 
 .hero-highlight span {
@@ -529,6 +529,8 @@ main {
   font-weight: 700;
 }
 
+/* --- HERO BOTTOM / AÇÕES --- */
+
 .hero-bottom {
   margin-top: 16px;
   display: flex;
@@ -537,34 +539,73 @@ main {
   align-items: flex-start;
 }
 
+/* Duas colunas iguais no desktop */
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
+  justify-content: center;
+
+  gap: 24px;          
+  margin-top: 24px;    
+  margin-bottom: 32px; 
 }
 
+
+/* BASE – igual pros dois, chamativo */
 .hero-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
-  color: #ffffff;
-  font-size: 0.88rem;
+
+  width: 100%;
+  min-height: 50px;
+  box-sizing: border-box;
+
+  font-size: 0.9rem;
   font-weight: 600;
-  padding: 9px 18px;
+  padding: 10px 22px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.45);
+
+  color: #f9fafb;
   transition:
     transform 0.14s ease,
     box-shadow 0.14s ease,
     background 0.14s ease,
     border-color 0.14s ease;
 }
+
+/* PRIMÁRIO – tutoriais */
+.hero-button--primary {
+  background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.55);
+}
+
+/* SECUNDÁRIO FORTE – atendimento (também bem chamativo) */
+.hero-button--support {
+  background: linear-gradient(135deg, #0ea5e9, #0f766e);
+  border-color: rgba(45, 212, 191, 0.9);
+  box-shadow: 0 10px 26px rgba(15, 118, 110, 0.65);
+}
+
+.hero-button:hover {
+  transform: translateY(-1px);
+}
+
+/* pequenos tweaks no hover pra cada um */
+.hero-button--primary:hover {
+  background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.6);
+}
+
+.hero-button--support:hover {
+  background: linear-gradient(135deg, #22c1c3, #0f766e);
+  box-shadow: 0 16px 36px rgba(15, 118, 110, 0.8);
+}
+
 
 /* DARK: CTA principal teal, sem dourado */
 :root.dark-theme .hero-button {
@@ -616,8 +657,9 @@ main {
 }
 
 .hero-meta {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--color-text-soft);
+  margin-top: 8px;        
 }
 
 .hero-meta strong {
@@ -625,19 +667,6 @@ main {
 }
 
 .hero-illustration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-illustration-inner {
-  position: relative;
-  width: min(310px, 72vw);
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -776,10 +805,112 @@ main {
   background: var(--accent-blue);
 }
 
-.section-title span {
-  font-size: 0.78rem;
-  color: var(--color-text-soft);
+/* Carrossel "Comece por aqui" */
+.featured-section {
+  margin-top: 24px;
 }
+
+/* Título + setinhas do carrossel */
+.featured-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.featured-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Navegação (botões anterior/próximo) */
+.featured-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.featured-nav-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: var(--color-body-bg);
+  color: var(--color-text-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.featured-nav-btn:hover:not(:disabled) {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.featured-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+:root.dark-theme .featured-nav-btn {
+  background: var(--color-card-bg);
+  border-color: #1f2937;
+}
+
+/* Faixa do carrossel: agora é slide, 1 por vez */
+/* Carrossel "Comece por aqui" */
+.featured-section {
+  margin-top: 24px;
+}
+
+/* faixa que contém os cards */
+.featured-carousel {
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+/* cada card do carrossel tem largura fixa */
+.video-card--featured {
+  flex: 0 0 280px;     /* largura mínima no mobile */
+  max-width: 280px;
+}
+
+/* em telas maiores, cards um pouco maiores */
+@media (min-width: 768px) {
+  .video-card--featured {
+    flex: 0 0 320px;
+    max-width: 320px;
+  }
+}
+
+/* pílula menor de duração, pode manter se já tiver parecido */
+.video-play-pill--small {
+  left: 8px;
+  bottom: 8px;
+  transform: none;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+}
+
+
+/* Versão menor da pílula de play (se ainda não tiver) */
+.video-play-pill--small {
+  left: 8px;
+  bottom: 8px;
+  transform: none;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+}
+
+
 
 .videos-grid {
   display: grid;
@@ -1003,12 +1134,11 @@ footer a:hover {
   .hero-text {
     padding: 18px 16px;
   }
-}
+} 
 
 .loading-overlay {
   position: fixed;
   inset: 0;
-  /* Fundo do loading com a mesma vibe "Slate Ocean" */
   background: radial-gradient(
     circle at top,
     rgba(11, 41, 72, 0.97),
@@ -1197,9 +1327,43 @@ footer a:hover {
   color: #1d4ed8;
 }
 
-:r
 
-  </style>
+/* Container do botão de atendimento */
+.hero-actions--small {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 260px;      /* 👈 largura MÁXIMA do botão */
+  margin: 16px auto 24px;
+  gap: 0;
+}
+
+.hero-actions--small .hero-button {
+  display: inline-flex;        /* deixa de ser “block” esticando tudo */
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;              /* NÃO estica dentro do flex */
+  width: auto;                 /* largura só do conteúdo */
+  max-width: none;             /* tira limite anterior, se tiver */
+
+  min-height: 40px;
+  font-size: 0.9rem;
+  padding: 8px 20px;           /* controla o “gordinho” do botão */
+}
+
+/* Versão compacta do hero-button (mesmo estilo, mas sem ficar gigante) */
+.hero-button--compact {
+  width: auto !important;          /* mata o width: 100% */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  min-height: 40px;
+}
+
+
+</style>
 </head>
 
 <body>
@@ -1209,482 +1373,618 @@ footer a:hover {
     <div class="loading-text">Carregando PRESTEK...</div>
   </div>
 
-  <header>
-    <div class="top-bar">
-      <div class="brand">
-        <img src="imagens/prestek-telecom2.jpg" alt="Logo Prestek Telecom" class="brand-logo" />
-        <div class="brand-text">
-          <span>Central de tutoriais internos</span>
+
+<header>
+  <div class="top-bar">
+    <div class="brand">
+      <img
+        src="imagens/prestek-telecom2.jpg"
+        alt="Logo PRESTEK Telecom"
+        class="brand-logo"
+      />
+      <div class="brand-text">
+        <span>Central de tutoriais</span>
+      </div>
+    </div>
+
+    <div class="top-right">
+      <div class="top-badge">
+        Tutoriais
+      </div>
+      <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Alternar tema claro/escuro"
+      >
+        <span class="theme-icon" aria-hidden="true">🌞</span>
+        <span class="theme-label">Modo claro</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-tag">
+        <span></span>
+        Tutoriais Prestek • Atendimento
+      </div>
+
+      <h1>Ana Ajuda! – Prestek Telecom</h1>
+
+      <p>
+        Nesta página, reunimos vídeos rápidos com passo a passo para resolver
+        os principais problemas do dia a dia dos nossos <strong>clientes</strong>, como
+        internet lenta, sem acesso, suporte, questões financeiras e muito mais.
+      </p>
+
+      <div class="hero-highlight">
+        <span>Vídeos curtinhos e direto ao ponto</span>
+        <span>Focado na rotina real da operação</span>
+        <span>Acesso prático via YouTube</span>
+      </div>
+
+      <div class="hero-meta">
+        <strong>Dica:</strong> use o campo de busca para encontrar
+        rapidamente o procedimento que precisa.
+      </div>
+    </div>
+
+    <div class="hero-illustration">
+      <div class="hero-illustration-inner">
+        <img
+          src="imagens/prestek-telecom2.jpg"
+          alt="Logo PRESTEK Telecom"
+          class="hero-image"
+        />
+        <div class="hero-badge-floating">
+          <div class="hero-badge-dot"></div>
+          Suporte disponível 24h
         </div>
       </div>
-      <div class="top-right">
-        <div class="top-badge">
-          Tutoriais de processos • IXC Soft
-        </div>
-        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">
-          <span class="theme-icon" aria-hidden="true">🌞</span>
-          <span class="theme-label">Modo claro</span>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="toolbar-left">
+      Selecione um vídeo abaixo ou pesquise pelo nome do processo, módulo ou palavra-chave.
+    </div>
+
+    <div class="search-wrapper">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input
+        id="searchInput"
+        type="search"
+        class="search-input"
+        placeholder="Buscar por módulo, processo ou palavra-chave..."
+        autocomplete="off"
+      />
+      <span id="searchClear" class="search-clear" aria-hidden="true">✕</span>
+    </div>
+  </section>
+
+  <!-- NOVA SEÇÃO: carrossel de vídeos em destaque -->
+  <!-- SEÇÃO: Carrossel de vídeos em destaque -->
+  <section class="featured-section" aria-label="Vídeos em destaque">
+    <div class="section-title featured-header">
+      <div class="featured-header-text">
+        <h2>Comece por aqui</h2>
+        <span>Vídeos mais usados no atendimento</span>
+      </div>
+
+      <div class="featured-nav">
+        <button
+          type="button"
+          class="featured-nav-btn"
+          id="featuredPrev"
+          aria-label="Vídeo anterior"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          class="featured-nav-btn"
+          id="featuredNext"
+          aria-label="Próximo vídeo"
+        >
+          ›
         </button>
       </div>
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-text">
-        <div class="hero-tag">
-          <span></span>
-          Página interna • Tutoriais PRESTEK + Atendimento
-        </div>
+    <div id="featuredCarousel" class="featured-carousel"></div>
+  </section>
 
-        <h1>Ana Ajuda! – Prestek Telecom</h1>
 
-        <p>
-          Nesta página, reunimos vídeos rápidos com passo a passo para resolver
-          os principais problemas do dia a dia dos nossos <strong>clientes</strong>, como
-          falhas de rede, falta de acesso, suporte, questões financeiras e muito mais.
-        </p>
+<section id="videos">
+  <div class="section-title">
+    <h2>Tutoriais em vídeo</h2>
+    <span id="videoCount"></span>
+  </div>
 
-        <div class="hero-highlight">
-          <span>Vídeos curtinhos e direto ao ponto</span>
-          <span>Focado na rotina real da operação</span>
-          <span>Acesso prático via YouTube</span>
-        </div>
 
-        <div class="hero-bottom">
-          <div class="hero-actions">
-            <a href="#videos" class="hero-button">
-              <span>⏵</span> Ver tutoriais em vídeo
-            </a>
+  <div id="videosGrid" class="videos-grid"></div>
 
-            <a
-              href="atendimento-whatsapp.html"
-              class="hero-button hero-button-secondary"
-            >
-              <span>🛟</span> Atendimento – problemas de conexão
-            </a>
-          </div>
+  <div id="emptyState" class="empty-state" style="display: none;">
+    <strong>Nenhum vídeo encontrado.</strong> Ajuste os termos da busca ou
+    limpe o campo de pesquisa para ver todos os tutoriais novamente.
+  </div>
+  
+  
 
-          <div class="hero-meta">
-            <strong>Dica:</strong> use o campo de busca para encontrar
-            rapidamente o procedimento que precisa.
-          </div>
-        </div>
-      </div>
+  <!-- Botões agora ficam embaixo dos vídeos -->
 
-      <div class="hero-illustration">
-        <div class="hero-illustration-inner">
-          <img
-            src="imagens/prestek-telecom2.jpg"
-            alt="Mascote da PRESTEK Telecom usando headset"
-            class="hero-image"
-          />
-          <div class="hero-badge-floating">
-            <div class="hero-badge-dot"></div>
-            Suporte disponível 24h
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="hero-actions hero-actions--small">
+  <a
+    href="atendimento-whatsapp.html"
+    class="hero-button hero-button--support hero-button--compact"
+  >
+    <span>🛟</span> Atendimento – Falar com atendente
+  </a>
+</div>
 
-    <section class="toolbar">
-      <div class="toolbar-left">
-        Selecione um vídeo abaixo ou pesquise pelo nome do processo, módulo ou palavra-chave.
-      </div>
+  <section class="feedback-section" aria-label="Feedback do conteúdo">
+    <div class="feedback-inner">
+      <div class="feedback-top">
+        <span class="feedback-question">Esse conteúdo foi útil?</span>
 
-      <div class="search-wrapper">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input
-          id="searchInput"
-          type="search"
-          class="search-input"
-          placeholder="Buscar por módulo, processo ou palavra-chave..."
-          autocomplete="off"
-        />
-        <span id="searchClear" class="search-clear" aria-hidden="true">✕</span>
-      </div>
-    </section>
-
-    <section id="videos">
-      <div class="section-title">
-        <h2>Tutoriais em vídeo</h2>
-        <span id="videoCount"></span>
-      </div>
-
-      <div id="videosGrid" class="videos-grid"></div>
-
-      <div id="emptyState" class="empty-state" style="display: none;">
-        <strong>Nenhum vídeo encontrado.</strong> Ajuste os termos da busca ou
-        limpe o campo de pesquisa para ver todos os tutoriais novamente.
-      </div>
-    </section>
-
-    <section class="feedback-section" aria-label="Feedback do conteúdo">
-      <div class="feedback-inner">
-        <div class="feedback-top">
-          <span class="feedback-question">Esse conteúdo foi útil?</span>
-
-          <div class="feedback-buttons">
-            <button type="button" class="feedback-btn" data-feedback="yes">
-              👍 <span>Sim, ajudou</span>
-            </button>
-            <button type="button" class="feedback-btn" data-feedback="no">
-              👎 <span>Pode melhorar</span>
-            </button>
-          </div>
-        </div>
-
-        <p
-          class="feedback-message"
-          id="feedbackMessage"
-          aria-live="polite"
-        ></p>
-
-        <div class="feedback-extra">
-          <label for="feedbackText">
-            Quer deixar uma sugestão ou comentário? (opcional)
-          </label>
-          <textarea
-            id="feedbackText"
-            class="feedback-textarea"
-            placeholder="Conte rapidamente o que podemos melhorar ou o que mais gostou deste conteúdo..."
-          ></textarea>
-          <button type="button" class="feedback-send" id="feedbackSend">
-            Enviar opinião
+        <div class="feedback-buttons">
+          <button type="button" class="feedback-btn" data-feedback="yes">
+            👍 <span>Sim, ajudou</span>
+          </button>
+          <button type="button" class="feedback-btn" data-feedback="no">
+            👎 <span>Pode melhorar</span>
           </button>
         </div>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <span>© <span id="year"></span> PRESTEK TELECOM</span>
-  </footer>
+      <p
+        class="feedback-message"
+        id="feedbackMessage"
+        aria-live="polite"
+      ></p>
 
-  <script>
-    const videos = [
-      {
-        titulo: "Sem acesso à internet – como conferir",
-        descricao:
-          "Passos básicos para conferir cabeamento, modem/roteador e verificar se o problema é interno ou na operadora antes de acionar o suporte.",
-        categoria: "Sem acesso",
-        duracao: "≈ 3 min",
-        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_SEM_ACESSO",
-        imageUrl: "imagens/mascote-prestek.jpg",
-        novo: true,
-      },
-      {
-        titulo: "Internet lenta – como conferir",
-        descricao:
-          "Como identificar possíveis causas de lentidão (Wi-Fi, cabo, quantidade de dispositivos, testes simples) antes de abrir chamado.",
-        categoria: "Internet lenta",
-        duracao: "≈ 4 min",
-        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_INTERNET_LENTA",
-        imageUrl: "imagens/mascote-prestek.jpg",
-        novo: true,
-      },
-      {
-        titulo: "Como testar a velocidade corretamente",
-        descricao:
-          "Tutorial mostrando como fazer o teste de velocidade, boas práticas para medir e como interpretar download, upload e ping.",
-        categoria: "Teste de velocidade",
-        duracao: "≈ 5 min",
-        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_TESTE_VELOCIDADE",
-        imageUrl: "imagens/mascote-prestek.jpg",
-        novo: false,
-      },
-      {
-        titulo: "Diferença entre rede 2.4G e 5G",
-        descricao:
-          "Explicação sobre alcance, velocidade e em quais situações usar 2.4 GHz ou 5 GHz para melhorar a experiência de Wi-Fi do cliente.",
-        categoria: "Wi-Fi / Redes",
-        duracao: "≈ 6 min",
-        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_24G_5G",
-        imageUrl: "imagens/mascote-prestek.jpg",
-        novo: false,
-      },
-      {
-        titulo: "Acessar boletos e 2ª via – Central do Assinante",
-        descricao:
-          "Passo a passo para o cliente gerar 2ª via do boleto, copiar código de barras e realizar o pagamento pela Central do Assinante PRESTEK.",
-        categoria: "Financeiro / Boletos",
-        duracao: "≈ 3 min",
-        driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_BOLETOS",
-        imageUrl: "imagens/mascote-prestek.jpg",
-        novo: true,
-      },
-    ];
+      <div class="feedback-extra">
+        <label for="feedbackText">
+          Quer deixar uma sugestão ou comentário? (opcional)
+        </label>
+        <textarea
+          id="feedbackText"
+          class="feedback-textarea"
+          placeholder="Conte rapidamente o que podemos melhorar ou o que mais gostou deste conteúdo..."
+        ></textarea>
+        <button type="button" class="feedback-send" id="feedbackSend">
+          Enviar opinião
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
 
-    const videosGrid = document.getElementById("videosGrid");
-    const emptyState = document.getElementById("emptyState");
-    const searchInput = document.getElementById("searchInput");
-    const searchClear = document.getElementById("searchClear");
-    const videoCount = document.getElementById("videoCount");
+<footer>
+  <span>© <span id="year"></span> PRESTEK TELECOM</span>
+</footer>
 
-    const themeToggleBtn = document.getElementById("themeToggle");
-    const themeIcon = themeToggleBtn
-      ? themeToggleBtn.querySelector(".theme-icon")
-      : null;
-    const themeLabel = themeToggleBtn
-      ? themeToggleBtn.querySelector(".theme-label")
-      : null;
+<script>
+  const videos = [
+    {
+      titulo: "Sem acesso à internet – como conferir",
+      descricao:
+        "Passos básicos para conferir cabeamento, modem/roteador e verificar se o problema é interno ou na operadora antes de acionar o suporte.",
+      categoria: "Sem acesso",
+      duracao: "≈ 3 min",
+      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_SEM_ACESSO",
+      imageUrl: "imagens/mascote-prestek.jpg",
+      novo: true,
+    },
+    {
+      titulo: "Internet lenta – como conferir",
+      descricao:
+        "Como identificar possíveis causas de lentidão (Wi-Fi, cabo, quantidade de dispositivos, testes simples) antes de abrir chamado.",
+      categoria: "Internet lenta",
+      duracao: "≈ 4 min",
+      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_INTERNET_LENTA",
+      imageUrl: "imagens/mascote-prestek.jpg",
+      novo: true,
+    },
+    {
+      titulo: "Como testar a velocidade corretamente",
+      descricao:
+        "Tutorial mostrando como fazer o teste de velocidade, boas práticas para medir e como interpretar download, upload e ping.",
+      categoria: "Teste de velocidade",
+      duracao: "≈ 5 min",
+      driveUrl:
+        "https://www.youtube.com/watch?v=SEU_VIDEO_TESTE_VELOCIDADE",
+      imageUrl: "imagens/mascote-prestek.jpg",
+      novo: false,
+    },
+    {
+      titulo: "Diferença entre rede 2.4G e 5G",
+      descricao:
+        "Explicação sobre alcance, velocidade e em quais situações usar 2.4 GHz ou 5 GHz para melhorar a experiência de Wi-Fi do cliente.",
+      categoria: "Wi-Fi / Redes",
+      duracao: "≈ 6 min",
+      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_24G_5G",
+      imageUrl: "imagens/mascote-prestek.jpg",
+      novo: false,
+    },
+    {
+      titulo: "Acessar boletos e 2ª via – Central do Assinante",
+      descricao:
+        "Passo a passo para o cliente gerar 2ª via do boleto, copiar código de barras e realizar o pagamento pela Central do Assinante PRESTEK.",
+      categoria: "Financeiro / Boletos",
+      duracao: "≈ 3 min",
+      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_BOLETOS",
+      imageUrl: "imagens/mascote-prestek.jpg",
+      novo: true,
+    },
+  ];
 
-    function renderVideos(lista) {
-      videosGrid.innerHTML = "";
+  const featuredCarousel = document.getElementById("featuredCarousel");
+  let featuredCurrentIndex = 0;
 
-      if (!lista.length) {
-        emptyState.style.display = "block";
+  // Elementos auxiliares
+  const videosGrid = document.getElementById("videosGrid"); // não usamos mais para exibir
+  const emptyState = document.getElementById("emptyState");
+  const videoCount = document.getElementById("videoCount");
+  const searchInput = document.getElementById("searchInput");
+  const searchClear = document.getElementById("searchClear");
+
+  function renderFeaturedVideos(lista) {
+    if (!featuredCarousel) return;
+
+    featuredCarousel.innerHTML = "";
+
+    lista.forEach((video) => {
+      const card = document.createElement("article");
+      card.className = "video-card video-card--featured";
+
+      card.innerHTML = `
+        <a href="${video.driveUrl}"
+           class="video-link"
+           target="_blank"
+           rel="noopener noreferrer">
+          <div class="video-thumb-wrapper">
+            <img
+              src="${video.imageUrl}"
+              alt="Thumb do vídeo: ${video.titulo}"
+              class="video-thumb"
+            />
+            <div class="video-play-pill video-play-pill--small">
+              <span>⏵</span> ${video.duracao || "Ver vídeo"}
+            </div>
+            ${video.novo ? '<span class="badge-new">Novo</span>' : ""}
+          </div>
+          <div class="video-body">
+            <div class="video-category">
+              ${video.categoria || "Tutorial PRESTEK"}
+            </div>
+            <h3 class="video-title">${video.titulo}</h3>
+            ${
+              video.descricao
+                ? `<p class="video-description">${video.descricao}</p>`
+                : ""
+            }
+          </div>
+        </a>
+      `;
+
+      featuredCarousel.appendChild(card);
+    });
+
+    featuredCurrentIndex = 0;
+    updateFeaturedCarousel();
+  }
+
+  function updateFeaturedCarousel() {
+    if (!featuredCarousel) return;
+
+    const slides = featuredCarousel.children;
+    if (!slides.length) return;
+
+    if (featuredCurrentIndex < 0) {
+      featuredCurrentIndex = slides.length - 1;
+    } else if (featuredCurrentIndex > slides.length - 1) {
+      featuredCurrentIndex = 0;
+    }
+
+    // largura de um card + o gap (16px do CSS)
+    const firstSlide = slides[0];
+    const slideWidth = firstSlide.getBoundingClientRect().width + 16;
+
+    const offset = slideWidth * featuredCurrentIndex;
+
+    featuredCarousel.scrollTo({
+      left: offset,
+      behavior: "smooth",
+    });
+
+    const prevBtn = document.getElementById("featuredPrev");
+    const nextBtn = document.getElementById("featuredNext");
+
+    if (prevBtn && nextBtn) {
+      const disabled = slides.length <= 1;
+      prevBtn.disabled = disabled;
+      nextBtn.disabled = disabled;
+    }
+  }
+
+  function setupFeaturedCarouselNavigation() {
+    const prevBtn = document.getElementById("featuredPrev");
+    const nextBtn = document.getElementById("featuredNext");
+
+    if (!prevBtn || !nextBtn || !featuredCarousel) return;
+
+    prevBtn.addEventListener("click", () => {
+      const total = featuredCarousel.children.length;
+      if (!total) return;
+      featuredCurrentIndex = (featuredCurrentIndex - 1 + total) % total;
+      updateFeaturedCarousel();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const total = featuredCarousel.children.length;
+      if (!total) return;
+      featuredCurrentIndex = (featuredCurrentIndex + 1) % total;
+      updateFeaturedCarousel();
+    });
+
+    window.addEventListener("resize", updateFeaturedCarousel);
+  }
+
+  const themeToggleBtn = document.getElementById("themeToggle");
+  const themeIcon = themeToggleBtn
+    ? themeToggleBtn.querySelector(".theme-icon")
+    : null;
+  const themeLabel = themeToggleBtn
+    ? themeToggleBtn.querySelector(".theme-label")
+    : null;
+
+  // Agora, "renderVideos" controla apenas o carrossel (e contagem de vídeos)
+  function renderVideos(lista) {
+    if (!lista || !lista.length) {
+      if (videoCount) {
         videoCount.textContent = "(0 vídeos)";
-        return;
       }
+      if (emptyState) {
+        emptyState.style.display = "block";
+      }
+      if (featuredCarousel) {
+        featuredCarousel.innerHTML = "";
+      }
+      const section = document.querySelector(".featured-section");
+      if (section) section.style.display = "none";
+      return;
+    }
 
+    if (emptyState) {
       emptyState.style.display = "none";
+    }
+
+    if (videoCount) {
       videoCount.textContent =
         lista.length === 1
           ? "(1 vídeo disponível)"
           : `(${lista.length} vídeos disponíveis)`;
-
-      lista.forEach((video) => {
-        const card = document.createElement("article");
-        card.className = "video-card";
-
-        card.innerHTML = `
-          <a href="${video.driveUrl}"
-             class="video-link"
-             target="_blank"
-             rel="noopener noreferrer">
-            <div class="video-thumb-wrapper">
-              <img src="${video.imageUrl}"
-                   alt="Thumb do vídeo: ${video.titulo}"
-                   class="video-thumb" />
-              <div class="video-play-pill">
-                <span>⏵</span> Assistir no YouTube
-              </div>
-            </div>
-            <div class="video-body">
-              <div class="video-category">
-                ${video.categoria || "Tutorial PRESTEK"}
-              </div>
-              <h3 class="video-title">${video.titulo}</h3>
-              <p class="video-description">${video.descricao}</p>
-              <div class="video-meta">
-                <span>⏱ ${video.duracao || "N/D"}</span>
-                <span>
-                  ${
-                    video.novo
-                      ? `<span class="badge-new">Novo</span>`
-                      : "IXC Soft na prática"
-                  }
-                </span>
-              </div>
-            </div>
-          </a>
-        `;
-
-        videosGrid.appendChild(card);
-      });
     }
 
-    function filtrarVideos(termo) {
-      const termoNormalizado = termo.trim().toLowerCase();
+    const section = document.querySelector(".featured-section");
+    if (section) section.style.display = "";
 
-      if (!termoNormalizado) {
+    renderFeaturedVideos(lista);
+  }
+
+  function filtrarVideos(termo) {
+    const termoNormalizado = termo.trim().toLowerCase();
+
+    if (!termoNormalizado) {
+      if (searchClear) {
         searchClear.classList.remove("visible");
-        renderVideos(videos);
-        return;
       }
-
-      searchClear.classList.add("visible");
-
-      const filtrados = videos.filter((video) => {
-        return (
-          video.titulo.toLowerCase().includes(termoNormalizado) ||
-          video.descricao.toLowerCase().includes(termoNormalizado) ||
-          (video.categoria &&
-            video.categoria.toLowerCase().includes(termoNormalizado))
-        );
-      });
-
-      renderVideos(filtrados);
-    }
-
-    if (searchInput) {
-      searchInput.addEventListener("input", (e) => {
-        filtrarVideos(e.target.value);
-      });
+      renderVideos(videos);
+      return;
     }
 
     if (searchClear) {
-      searchClear.addEventListener("click", () => {
+      searchClear.classList.add("visible");
+    }
+
+    const filtrados = videos.filter((video) => {
+      const titulo = video.titulo.toLowerCase();
+      const descricao = (video.descricao || "").toLowerCase();
+      const categoria = (video.categoria || "").toLowerCase();
+
+      return (
+        titulo.includes(termoNormalizado) ||
+        descricao.includes(termoNormalizado) ||
+        categoria.includes(termoNormalizado)
+      );
+    });
+
+    renderVideos(filtrados);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      filtrarVideos(e.target.value);
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener("click", () => {
+      if (searchInput) {
         searchInput.value = "";
         filtrarVideos("");
         searchInput.focus();
+      }
+    });
+  }
+
+  // ano no rodapé
+  const yearSpan = document.getElementById("year");
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
+
+  // Tema claro / escuro
+  function applyTheme(theme) {
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.classList.add("dark-theme");
+    } else {
+      root.classList.remove("dark-theme");
+    }
+
+    localStorage.setItem("prestek-theme", theme);
+
+    const isDark = root.classList.contains("dark-theme");
+    if (themeIcon && themeLabel) {
+      themeIcon.textContent = isDark ? "🌙" : "🌞";
+      themeLabel.textContent = isDark ? "Modo escuro" : "Modo claro";
+    }
+  }
+
+  (function initTheme() {
+    const storedTheme = localStorage.getItem("prestek-theme");
+    if (storedTheme) {
+      applyTheme(storedTheme);
+    } else {
+      const prefersDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      applyTheme(prefersDark ? "dark" : "light");
+    }
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener("click", () => {
+        const isDark =
+          document.documentElement.classList.contains("dark-theme");
+        applyTheme(isDark ? "light" : "dark");
       });
     }
+  })();
 
-    // ano no rodapé
-    const yearSpan = document.getElementById("year");
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
+  // Render inicial: todos os vídeos no carrossel
+  renderVideos(videos);
+  setupFeaturedCarouselNavigation();
 
-    // Tema claro / escuro
-    function applyTheme(theme) {
-      const root = document.documentElement;
+  // Feedback "Esse conteúdo foi útil?"
+  const feedbackButtons = document.querySelectorAll(".feedback-btn");
 
-      if (theme === "dark") {
-        root.classList.add("dark-theme");
+  const feedbackMessage = document.getElementById("feedbackMessage");
+  const feedbackText = document.getElementById("feedbackText");
+  const feedbackSend = document.getElementById("feedbackSend");
+  let feedbackChoice = null;
+
+  feedbackButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tipo = btn.dataset.feedback;
+      feedbackChoice = tipo;
+
+      feedbackButtons.forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+
+      if (!feedbackMessage) return;
+
+      if (tipo === "yes") {
+        feedbackMessage.textContent =
+          "Obrigado! Sua opinião ajuda a melhorar nossos tutoriais. 💚";
       } else {
-        root.classList.remove("dark-theme");
+        feedbackMessage.textContent =
+          "Obrigado pelo retorno! Vamos usar seu feedback para melhorar este conteúdo. 🙂";
+      }
+    });
+  });
+
+  if (feedbackSend) {
+    feedbackSend.addEventListener("click", async () => {
+      if (!feedbackMessage) return;
+
+      const comentario = feedbackText ? feedbackText.value.trim() : "";
+
+      if (!feedbackChoice && !comentario) {
+        feedbackMessage.textContent =
+          "Por favor, selecione se o conteúdo foi útil ou escreva um comentário antes de enviar.";
+        return;
       }
 
-      localStorage.setItem("prestek-theme", theme);
+      const dados = new URLSearchParams();
+      dados.append("util", feedbackChoice || "");
+      dados.append("mensagem", comentario);
+      dados.append(
+        "pagina",
+        window.location.pathname.split("/").pop() || "index.html"
+      );
 
-      const isDark = root.classList.contains("dark-theme");
-      if (themeIcon && themeLabel) {
-        themeIcon.textContent = isDark ? "🌙" : "🌞";
-        themeLabel.textContent = isDark ? "Modo escuro" : "Modo claro";
-      }
-    }
-
-    (function initTheme() {
-      const storedTheme = localStorage.getItem("prestek-theme");
-      if (storedTheme) {
-        applyTheme(storedTheme);
-      } else {
-        const prefersDark =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches;
-        applyTheme(prefersDark ? "dark" : "light");
-      }
-
-      if (themeToggleBtn) {
-        themeToggleBtn.addEventListener("click", () => {
-          const isDark =
-            document.documentElement.classList.contains("dark-theme");
-          applyTheme(isDark ? "light" : "dark");
+      try {
+        const resposta = await fetch("salvar_feedback.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: dados.toString(),
         });
-      }
-    })();
 
-    // Render inicial dos vídeos
-    renderVideos(videos);
-
-    // Feedback "Esse conteúdo foi útil?"
-    const feedbackButtons = document.querySelectorAll(".feedback-btn");
-    const feedbackMessage = document.getElementById("feedbackMessage");
-    const feedbackText = document.getElementById("feedbackText");
-    const feedbackSend = document.getElementById("feedbackSend");
-    let feedbackChoice = null;
-
-    feedbackButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tipo = btn.dataset.feedback;
-        feedbackChoice = tipo;
-
-        feedbackButtons.forEach((b) => b.classList.remove("is-active"));
-        btn.classList.add("is-active");
-
-        if (!feedbackMessage) return;
-
-        if (tipo === "yes") {
+        if (resposta.ok) {
           feedbackMessage.textContent =
-            "Obrigado! Sua opinião ajuda a melhorar nossos tutoriais. 💚";
+            "Obrigado! Seu feedback foi enviado com sucesso. 💚";
+          if (feedbackText) feedbackText.value = "";
         } else {
           feedbackMessage.textContent =
-            "Obrigado pelo retorno! Vamos usar seu feedback para melhorar este conteúdo. 🙂";
+            "Não foi possível enviar o feedback agora. Tente novamente mais tarde.";
         }
-      });
+      } catch (erro) {
+        feedbackMessage.textContent =
+          "Não foi possível enviar o feedback agora. Verifique sua conexão e tente novamente.";
+      }
     });
+  }
 
-    if (feedbackSend) {
-      feedbackSend.addEventListener("click", async () => {
-        if (!feedbackMessage) return;
+  // Loader da página (overlay de carregamento)
+  const pageLoader = document.getElementById("pageLoader");
 
-        const comentario = feedbackText ? feedbackText.value.trim() : "";
+  window.addEventListener("load", () => {
+    if (pageLoader) {
+      pageLoader.classList.remove("is-visible");
+      pageLoader.setAttribute("aria-hidden", "true");
+    }
+  });
 
-        if (!feedbackChoice && !comentario) {
-          feedbackMessage.textContent =
-            "Por favor, selecione se o conteúdo foi útil ou escreva um comentário antes de enviar.";
+  function setupLinkLoader() {
+    if (!pageLoader) return;
+
+    const links = document.querySelectorAll(
+      'a[href$=".html"]:not([data-no-loader])'
+    );
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const url = link.getAttribute("href");
+
+        if (
+          !url ||
+          url.startsWith("#") ||
+          e.ctrlKey ||
+          e.metaKey ||
+          e.shiftKey ||
+          e.altKey ||
+          link.target === "_blank"
+        ) {
           return;
         }
 
-        const dados = new URLSearchParams();
-        dados.append("util", feedbackChoice || "");
-        dados.append("mensagem", comentario);
-        dados.append(
-          "pagina",
-          window.location.pathname.split("/").pop() || "index.html"
-        );
+        e.preventDefault();
 
-        try {
-          const resposta = await fetch("salvar_feedback.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: dados.toString(),
-          });
+        pageLoader.classList.add("is-visible");
+        pageLoader.removeAttribute("aria-hidden");
 
-          if (resposta.ok) {
-            feedbackMessage.textContent =
-              "Obrigado! Seu feedback foi enviado com sucesso. 💚";
-            if (feedbackText) feedbackText.value = "";
-          } else {
-            feedbackMessage.textContent =
-              "Não foi possível enviar o feedback agora. Tente novamente mais tarde.";
-          }
-        } catch (erro) {
-          feedbackMessage.textContent =
-            "Não foi possível enviar o feedback agora. Verifique sua conexão e tente novamente.";
-        }
+        setTimeout(() => {
+          window.location.href = url;
+        }, 250);
       });
-    }
-
-    // Loader da página (overlay de carregamento)
-    const pageLoader = document.getElementById("pageLoader");
-
-    window.addEventListener("load", () => {
-      if (pageLoader) {
-        pageLoader.classList.remove("is-visible");
-        pageLoader.setAttribute("aria-hidden", "true");
-      }
     });
+  }
 
-    function setupLinkLoader() {
-      if (!pageLoader) return;
-
-      const links = document.querySelectorAll(
-        'a[href$=".html"]:not([data-no-loader])'
-      );
-
-      links.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          const url = link.getAttribute("href");
-
-          if (
-            !url ||
-            url.startsWith("#") ||
-            e.ctrlKey ||
-            e.metaKey ||
-            e.shiftKey ||
-            e.altKey ||
-            link.target === "_blank"
-          ) {
-            return;
-          }
-
-          e.preventDefault();
-
-          pageLoader.classList.add("is-visible");
-          pageLoader.removeAttribute("aria-hidden");
-
-          setTimeout(() => {
-            window.location.href = url;
-          }, 250);
-        });
-      });
-    }
-
-    setupLinkLoader();
-  </script>
-</body>
-</html>
+  setupLinkLoader();
+</script>
