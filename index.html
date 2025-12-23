@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Central de Tutoriais - PRESTEK Telecom</title>
+  <title>Central Ana Ajuda! - PRESTEK Telecom</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,15 +118,57 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
+
+  /* Mais atenção sem “placa”/caixa pesada */
+  padding: 2px 0 10px;
+}
+
+.brand::after {
+  /* Faixa de acento abaixo da marca (chama atenção, mas discreta) */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(225, 29, 72, 0.85),
+    rgba(29, 78, 216, 0.85)
+  );
+  opacity: 0.95;
 }
 
 .brand-logo {
-  height: 32px;
+  height: 54px;
   width: auto;
   display: block;
-  filter: none !important;        /* mantém o laranja original */
-  mix-blend-mode: normal;        /* não mistura com o fundo */
+
+  /* Destaca a imagem sem fundo branco */
+  filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.18));
+  transition: transform 160ms ease, filter 160ms ease;
 }
+
+.brand:hover .brand-logo {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 14px 24px rgba(15, 23, 42, 0.22));
+}
+
+:root.dark-theme .brand::after {
+  background: linear-gradient(
+    90deg,
+    rgba(250, 204, 107, 0.95),
+    rgba(34, 193, 214, 0.95)
+  );
+}
+
+/* Responsivo */
+@media (max-width: 520px) {
+  .brand-logo { height: 46px; }
+}
+
 
 .brand-text {
   display: flex;
@@ -805,6 +847,74 @@ main {
   background: var(--accent-blue);
 }
 
+/* ===== Destaque: Seção "Tutoriais em vídeo" (mais chamativa) ===== */
+.videos-section {
+  margin-top: 18px;
+  padding: 18px 18px 22px;
+  border-radius: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(29, 78, 216, 0.10),
+    rgba(225, 29, 72, 0.06)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+}
+
+:root.dark-theme .videos-section {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 193, 214, 0.12),
+    rgba(250, 204, 107, 0.06)
+  );
+  border-color: var(--color-border);
+  box-shadow: 0 22px 50px rgba(3, 7, 18, 0.9);
+}
+
+.videos-section__head {
+  margin-bottom: 10px;
+}
+
+.section-title.section-title--big {
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+.section-title.section-title--big h2 {
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+}
+
+.section-title.section-title--big h2::after {
+  width: 56px;
+  height: 3px;
+  margin-top: 6px;
+}
+
+.videos-count {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+}
+
+.videos-subtitle {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-text-soft);
+}
+
+@media (max-width: 520px) {
+  .videos-section {
+    padding: 16px 14px 18px;
+    border-radius: 20px;
+  }
+
+  .section-title.section-title--big h2 {
+    font-size: 1.22rem;
+  }
+}
+
 /* Carrossel "Comece por aqui" */
 .featured-section {
   margin-top: 24px;
@@ -838,7 +948,7 @@ main {
   height: 28px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.5);
-  background: var(--color-body-bg);
+  background: var(--color-card-bg);
   color: var(--color-text-soft);
   display: inline-flex;
   align-items: center;
@@ -873,14 +983,32 @@ main {
 .featured-carousel {
   display: flex;
   gap: 16px;
-  overflow: hidden;
+
+  /* permite navegação por botões (scroll programático) */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
   margin-top: 12px;
+  padding-bottom: 2px; /* evita corte de sombra */
+}
+
+.featured-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.featured-carousel {
+  scrollbar-width: none;
 }
 
 /* cada card do carrossel tem largura fixa */
 .video-card--featured {
   flex: 0 0 280px;     /* largura mínima no mobile */
   max-width: 280px;
+
+  scroll-snap-align: start;
 }
 
 /* em telas maiores, cards um pouco maiores */
@@ -961,8 +1089,149 @@ main {
 .video-thumb-wrapper {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+
+  padding-bottom: 40px; /* espaço para a pílula de tempo no desktop */
+  isolation: isolate;
+
+  /* Tema por vídeo (pode ser sobrescrito via inline style) */
+  --thumb-a: #fb923c;
+  --thumb-b: #f97316;
+  --thumb-c: #e11d48;
+
+  background:
+    radial-gradient(120% 120% at 18% 18%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(120% 120% at 82% 30%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(135deg, var(--thumb-a) 0%, var(--thumb-b) 45%, var(--thumb-c) 100%);
 }
 
+.video-thumb-wrapper::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -45%;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 58%),
+    radial-gradient(circle at 70% 65%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 60%);
+  transform: rotate(10deg);
+  animation: thumb-drift 12s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.video-thumb-wrapper::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.10) 0px,
+      rgba(255, 255, 255, 0.10) 6px,
+      rgba(255, 255, 255, 0) 6px,
+      rgba(255, 255, 255, 0) 16px
+    );
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.video-thumb-bg-emoji {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+
+  font-size: clamp(6.6rem, 10vw, 9.5rem);
+  line-height: 1;
+  opacity: 0.18;
+  transform: rotate(-10deg) translateY(-6%);
+  filter: drop-shadow(0 22px 40px rgba(15, 23, 42, 0.28));
+  z-index: 1;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes thumb-drift {
+  0%, 100% { transform: rotate(10deg) translate3d(0, 0, 0); opacity: 0.9; }
+  50% { transform: rotate(10deg) translate3d(2%, -2%, 0); opacity: 1; }
+}
+
+.video-thumb-emoji-float {
+  position: relative;
+  z-index: 2;
+  animation: emoji-float 6.2s ease-in-out infinite;
+  transform: translateY(-4px);
+  will-change: transform;
+}
+
+@keyframes emoji-float {
+  0%, 100% { transform: translateY(-4px); }
+  50% { transform: translateY(-10px); }
+}
+
+.video-thumb-emoji {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.18rem, 0.6vw, 0.34rem);
+
+  font-size: clamp(3.6rem, 7.2vw, 5.2rem);
+  line-height: 1;
+
+  padding: clamp(0.48rem, 1.1vw, 0.72rem) clamp(0.6rem, 1.4vw, 0.92rem);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.35);
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.video-thumb-emoji::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.10);
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.video-thumb-emoji span {
+  filter: drop-shadow(0 12px 18px rgba(15, 23, 42, 0.22));
+}
+
+.video-card:hover .video-thumb-emoji-float {
+  animation-play-state: paused;
+  transform: translateY(-10px) scale(1.04);
+  transition: transform 0.22s ease;
+}
+
+@media (min-width: 900px) {
+  /* Thumb mais alto no desktop para dar mais “vida” e espaço pro tempo */
+  .video-thumb-wrapper {
+    aspect-ratio: 16 / 10;
+    padding-bottom: 46px;
+  }
+}
+
+@media (max-width: 520px) {
+  /* No celular mantemos compacto */
+  .video-thumb-wrapper {
+    padding-bottom: 34px;
+  }
+}
+
+/* (Opcional) Mantido por compatibilidade caso volte a usar thumbnails do YouTube */
 .video-thumb {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -973,27 +1242,29 @@ main {
 
 .video-card:hover .video-thumb {
   transform: scale(1.04);
-}
-
-.video-play-pill {
+}.video-play-pill {
   position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.9);
+  z-index: 6;
+
+  background: rgba(15, 23, 42, 0.92);
   color: #f9fafb;
-  padding: 5px 11px;
+  padding: 6px 12px;
   border-radius: 999px;
   font-size: 0.74rem;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.5);
+  gap: 5px;
+  white-space: nowrap;
+
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.55);
 }
 
 .video-play-pill span {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
 }
 
 .video-body {
@@ -1012,6 +1283,22 @@ main {
   color: var(--accent-blue);
   opacity: 0.95;
 }
+
+.video-emoji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  font-size: 0.95rem;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.video-category-text {
+  text-transform: uppercase;
+}
+
 
 .video-title {
   font-size: 0.96rem;
@@ -1047,6 +1334,12 @@ main {
 }
 
 .badge-new {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+
+  z-index: 7;
   padding: 3px 7px;
   border-radius: 999px;
   background: rgba(37, 99, 235, 0.08); 
@@ -1363,6 +1656,506 @@ footer a:hover {
 }
 
 
+
+/* ================= VIDEO MODAL (YouTube dentro da página) ================= */
+/* ================= VIDEO MODAL (melhorado) ================= */
+body.modal-open {
+  overflow: hidden;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+
+.video-modal.is-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.video-modal__content {
+  position: relative;
+  width: min(1100px, calc(100% - 24px));
+  height: min(calc(100vh - 24px), 820px); /* ✅ garante altura real, não só max-height */
+  background: var(--color-card-bg);
+  border-radius: 18px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--color-card-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.video-modal__title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-modal__external {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.video-modal__external:hover {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+.video-modal__close {
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.video-modal__close:hover {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+/* ✅ CORRIGIDO: evita “corte”/controles bugados do YouTube */
+.video-modal__frame {
+  width: 100%;
+  flex: 1;        /* ocupa o espaço restante abaixo do header */
+  min-height: 0;  /* MUITO importante em flex pra não “cortar” */
+  background: #000;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.video-modal__frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+
+
+
+/* =======================
+   Vídeo — Visualização (modal em formato de página)
+   ======================= */
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+
+.video-modal.is-open {
+  display: block;
+}
+
+.video-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.video-modal__content {
+  position: relative;
+  margin: 18px auto;
+  width: min(1240px, calc(100% - 36px));
+  height: min(920px, calc(100% - 36px));
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(180deg, rgba(29, 78, 216, 0.14), rgba(29, 78, 216, 0));
+}
+
+.video-modal__back {
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.04);
+  color: var(--color-text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.video-modal__back:hover {
+  transform: translateY(-1px);
+}
+
+.video-modal__header-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.video-modal__kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--color-text-soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.video-modal__kicker .kicker-emoji {
+  font-size: 18px;
+}
+
+.video-modal__kicker .kicker-pill {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(29, 78, 216, 0.28);
+  background: rgba(29, 78, 216, 0.12);
+}
+
+.video-modal__kicker .kicker-pill--soft {
+  border-color: rgba(225, 29, 72, 0.28);
+  background: rgba(225, 29, 72, 0.10);
+}
+
+.video-modal__title {
+  color: var(--color-text);
+  font-weight: 900;
+  line-height: 1.15;
+  font-size: clamp(18px, 2.1vw, 24px);
+  letter-spacing: -0.01em;
+}
+
+.video-modal__header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.video-modal__action {
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.04);
+  color: var(--color-text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.video-modal__action--primary {
+  border-color: rgba(29, 78, 216, 0.35);
+  background: rgba(29, 78, 216, 0.12);
+}
+
+.video-modal__action:hover {
+  transform: translateY(-1px);
+}
+
+.video-modal__close {
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.04);
+  color: var(--color-text);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.video-modal__scroll {
+  height: 100%;
+  overflow: auto;
+}
+
+.video-modal__body {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1.55fr 0.85fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.video-modal__frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--color-card-shadow);
+}
+
+.video-modal__frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.video-modal__meta {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.04);
+  color: var(--color-text-soft);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.video-modal__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.video-modal__section {
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  padding: 14px 14px;
+  background: rgba(15, 23, 42, 0.03);
+}
+
+:root.dark-theme .video-modal__section {
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.video-modal__section h3 {
+  margin: 0 0 8px 0;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.video-modal__description {
+  margin: 0;
+  color: var(--color-text-soft);
+  line-height: 1.55;
+}
+
+.video-modal__tips {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-text-soft);
+  line-height: 1.55;
+}
+
+.video-modal__related {
+  padding: 0 16px 16px;
+}
+
+.video-modal__related-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 2px 10px;
+}
+
+.video-modal__related-header h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.video-modal__related-hint {
+  color: var(--color-text-soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.related-card {
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.03);
+  border-radius: 18px;
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+}
+
+.related-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--color-card-shadow);
+}
+
+.related-card__thumb {
+  position: relative;
+  height: 92px;
+  border-bottom: 1px solid var(--color-border);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.related-card__thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--thumb-a), var(--thumb-b));
+  opacity: 0.95;
+}
+
+.related-card__thumb::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.22), transparent 55%);
+  transform: rotate(12deg);
+}
+
+.related-card__emoji {
+  position: relative;
+  font-size: 38px;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,0.25));
+}
+
+.related-card__body {
+  padding: 12px 12px 14px;
+}
+
+.related-card__cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-soft);
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.related-card__title {
+  margin: 6px 0 0 0;
+  color: var(--color-text);
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  background: rgba(2, 6, 23, 0.92);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+@media (max-width: 980px) {
+  .video-modal__body {
+    grid-template-columns: 1fr;
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .video-modal__header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .video-modal__header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 540px) {
+  .video-modal__content {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-modal__header-actions {
+    justify-content: space-between;
+  }
+
+  .video-modal__back {
+    padding: 10px 10px;
+  }
+
+  .video-modal__action {
+    padding: 10px 10px;
+  }
+}
+
 </style>
 </head>
 
@@ -1383,7 +2176,7 @@ footer a:hover {
         class="brand-logo"
       />
       <div class="brand-text">
-        <span>Central de tutoriais</span>
+        <span>Central de vídeos Prestek</span>
       </div>
     </div>
 
@@ -1405,47 +2198,7 @@ footer a:hover {
 </header>
 
 <main>
-  <section class="hero">
-    <div class="hero-text">
-      <div class="hero-tag">
-        <span></span>
-        Tutoriais Prestek • Atendimento
-      </div>
-
-      <h1>Ana Ajuda! – Prestek Telecom</h1>
-
-      <p>
-        Nesta página, reunimos vídeos rápidos com passo a passo para resolver
-        os principais problemas do dia a dia dos nossos <strong>clientes</strong>, como
-        internet lenta, sem acesso, suporte, questões financeiras e muito mais.
-      </p>
-
-      <div class="hero-highlight">
-        <span>Vídeos curtinhos e direto ao ponto</span>
-        <span>Focado na rotina real da operação</span>
-        <span>Acesso prático via YouTube</span>
-      </div>
-
-      <div class="hero-meta">
-        <strong>Dica:</strong> use o campo de busca para encontrar
-        rapidamente o procedimento que precisa.
-      </div>
-    </div>
-
-    <div class="hero-illustration">
-      <div class="hero-illustration-inner">
-        <img
-          src="imagens/prestek-telecom2.jpg"
-          alt="Logo PRESTEK Telecom"
-          class="hero-image"
-        />
-        <div class="hero-badge-floating">
-          <div class="hero-badge-dot"></div>
-          Suporte disponível 24h
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Seção inicial (hero) removida para não aparecer na página -->
 
   <section class="toolbar">
     <div class="toolbar-left">
@@ -1467,6 +2220,8 @@ footer a:hover {
 
   <!-- NOVA SEÇÃO: carrossel de vídeos em destaque -->
   <!-- SEÇÃO: Carrossel de vídeos em destaque -->
+  <!-- COMEÇE POR AQUI (DESATIVADO) -->
+  <!--
   <section class="featured-section" aria-label="Vídeos em destaque">
     <div class="section-title featured-header">
       <div class="featured-header-text">
@@ -1496,14 +2251,19 @@ footer a:hover {
 
     <div id="featuredCarousel" class="featured-carousel"></div>
   </section>
+  -->
 
+<section id="videos" class="videos-section" aria-label="Lista de tutoriais">
+  <div class="videos-section__head">
+    <div class="section-title section-title--big">
+      <h2>📚 Tutoriais em vídeo</h2>
+      <span id="videoCount" class="videos-count"></span>
+    </div>
 
-<section id="videos">
-  <div class="section-title">
-    <h2>Tutoriais em vídeo</h2>
-    <span id="videoCount"></span>
+    <p class="videos-subtitle">
+      Passo a passo rápido para as dúvidas mais comuns. Clique em um card para abrir o vídeo.
+    </p>
   </div>
-
 
   <div id="videosGrid" class="videos-grid"></div>
 
@@ -1511,11 +2271,9 @@ footer a:hover {
     <strong>Nenhum vídeo encontrado.</strong> Ajuste os termos da busca ou
     limpe o campo de pesquisa para ver todos os tutoriais novamente.
   </div>
-  
-  
+</section>
 
-  <!-- Botões agora ficam embaixo dos vídeos -->
-
+<!-- Acesso rápido ao atendimento -->
 <div class="hero-actions hero-actions--small">
   <a
     href="atendimento-whatsapp.html"
@@ -1524,6 +2282,8 @@ footer a:hover {
     <span>🛟</span> Atendimento – Falar com atendente
   </a>
 </div>
+
+
 
   <section class="feedback-section" aria-label="Feedback do conteúdo">
     <div class="feedback-inner">
@@ -1567,6 +2327,81 @@ footer a:hover {
   <span>© <span id="year"></span> PRESTEK TELECOM</span>
 </footer>
 
+<!-- Modal / Página de visualização de vídeo -->
+<div id="videoModal" class="video-modal" aria-hidden="true">
+  <div class="video-modal__backdrop" onclick="closeVideoModal()"></div>
+
+  <div class="video-modal__content" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+    <header class="video-modal__header">
+      <button class="video-modal__back" type="button" onclick="closeVideoModal()" aria-label="Voltar para a lista">
+        ← Voltar
+      </button>
+
+      <div class="video-modal__header-text">
+        <div id="videoModalKicker" class="video-modal__kicker"></div>
+        <div id="videoModalTitle" class="video-modal__title"></div>
+      </div>
+
+      <div class="video-modal__header-actions">
+        <button id="videoModalCopy" class="video-modal__action" type="button">
+          Copiar link
+        </button>
+
+        <a id="videoModalExternal" class="video-modal__action video-modal__action--primary" href="#" target="_blank" rel="noopener noreferrer">
+          Abrir no YouTube
+        </a>
+
+        <button class="video-modal__close" type="button" onclick="closeVideoModal()" aria-label="Fechar vídeo">
+          ✕
+        </button>
+      </div>
+    </header>
+
+    <div class="video-modal__scroll">
+      <div class="video-modal__body">
+        <div class="video-modal__player">
+          <div class="video-modal__frame">
+            <iframe
+              id="videoIframe"
+              src=""
+              title="Vídeo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="video-modal__meta">
+            <span class="meta-pill" id="videoModalDuration" hidden></span>
+            <span class="meta-pill" id="videoModalCategory" hidden></span>
+          </div>
+        </div>
+
+        <aside class="video-modal__sidebar">
+          <div class="video-modal__section">
+            <h3>Resumo</h3>
+            <p id="videoModalDescription" class="video-modal__description"></p>
+          </div>
+
+          <div class="video-modal__section" id="videoModalTipsWrap" hidden>
+            <h3>Dicas rápidas</h3>
+            <ul id="videoModalTips" class="video-modal__tips"></ul>
+          </div>
+        </aside>
+      </div>
+
+      <div class="video-modal__related">
+        <div class="video-modal__related-header">
+          <h3>Relacionados</h3>
+          <div class="video-modal__related-hint">Clique em um vídeo para trocar sem fechar.</div>
+        </div>
+        <div id="videoModalRelatedGrid" class="related-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+</div>
+
 <script>
   const videos = [
     {
@@ -1574,8 +2409,9 @@ footer a:hover {
       descricao:
         "Passos básicos para conferir cabeamento, modem/roteador e verificar se o problema é interno ou na operadora antes de acionar o suporte.",
       categoria: "Sem acesso",
+      emoji: "🚫🌐",
       duracao: "≈ 3 min",
-      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_SEM_ACESSO",
+      driveUrl: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
       imageUrl: "imagens/mascote-prestek.jpg",
       novo: true,
     },
@@ -1585,7 +2421,7 @@ footer a:hover {
         "Como identificar possíveis causas de lentidão (Wi-Fi, cabo, quantidade de dispositivos, testes simples) antes de abrir chamado.",
       categoria: "Internet lenta",
       duracao: "≈ 4 min",
-      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_INTERNET_LENTA",
+      driveUrl: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
       imageUrl: "imagens/mascote-prestek.jpg",
       novo: true,
     },
@@ -1596,7 +2432,7 @@ footer a:hover {
       categoria: "Teste de velocidade",
       duracao: "≈ 5 min",
       driveUrl:
-        "https://www.youtube.com/watch?v=SEU_VIDEO_TESTE_VELOCIDADE",
+        "https://www.youtube.com/watch?v=jNQXAC9IVRw",
       imageUrl: "imagens/mascote-prestek.jpg",
       novo: false,
     },
@@ -1606,7 +2442,7 @@ footer a:hover {
         "Explicação sobre alcance, velocidade e em quais situações usar 2.4 GHz ou 5 GHz para melhorar a experiência de Wi-Fi do cliente.",
       categoria: "Wi-Fi / Redes",
       duracao: "≈ 6 min",
-      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_24G_5G",
+      driveUrl: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
       imageUrl: "imagens/mascote-prestek.jpg",
       novo: false,
     },
@@ -1616,123 +2452,348 @@ footer a:hover {
         "Passo a passo para o cliente gerar 2ª via do boleto, copiar código de barras e realizar o pagamento pela Central do Assinante PRESTEK.",
       categoria: "Financeiro / Boletos",
       duracao: "≈ 3 min",
-      driveUrl: "https://www.youtube.com/watch?v=SEU_VIDEO_BOLETOS",
+      driveUrl: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
       imageUrl: "imagens/mascote-prestek.jpg",
       novo: true,
     },
   ];
 
-  const featuredCarousel = document.getElementById("featuredCarousel");
-  let featuredCurrentIndex = 0;
+  // "Comece por aqui" (carrossel) desativado
+  // const featuredCarousel = document.getElementById("featuredCarousel");
+  // let featuredCurrentIndex = 0;
 
   // Elementos auxiliares
-  const videosGrid = document.getElementById("videosGrid"); // não usamos mais para exibir
+  const videosGrid = document.getElementById("videosGrid"); // grade de tutoriais
   const emptyState = document.getElementById("emptyState");
   const videoCount = document.getElementById("videoCount");
   const searchInput = document.getElementById("searchInput");
   const searchClear = document.getElementById("searchClear");
 
-  function renderFeaturedVideos(lista) {
-    if (!featuredCarousel) return;
+  
+  function getYouTubeId(url) {
+    if (!url) return "";
+    try {
+      const u = new URL(url);
 
-    featuredCarousel.innerHTML = "";
+      // watch?v=
+      const v = u.searchParams.get("v");
+      if (v) return v;
 
-    lista.forEach((video) => {
-      const card = document.createElement("article");
-      card.className = "video-card video-card--featured";
+      // youtu.be/ID
+      if (u.hostname.includes("youtu.be")) {
+        return u.pathname.replace("/", "");
+      }
 
-      card.innerHTML = `
-        <a href="${video.driveUrl}"
-           class="video-link"
-           target="_blank"
-           rel="noopener noreferrer">
-          <div class="video-thumb-wrapper">
-            <img
-              src="${video.imageUrl}"
-              alt="Thumb do vídeo: ${video.titulo}"
-              class="video-thumb"
-            />
-            <div class="video-play-pill video-play-pill--small">
-              <span>⏵</span> ${video.duracao || "Ver vídeo"}
-            </div>
-            ${video.novo ? '<span class="badge-new">Novo</span>' : ""}
-          </div>
-          <div class="video-body">
-            <div class="video-category">
-              ${video.categoria || "Tutorial PRESTEK"}
-            </div>
-            <h3 class="video-title">${video.titulo}</h3>
-            ${
-              video.descricao
-                ? `<p class="video-description">${video.descricao}</p>`
-                : ""
-            }
-          </div>
-        </a>
-      `;
+      // /embed/ID
+      const parts = u.pathname.split("/").filter(Boolean);
+      const embedIndex = parts.indexOf("embed");
+      if (embedIndex >= 0 && parts[embedIndex + 1]) return parts[embedIndex + 1];
 
-      featuredCarousel.appendChild(card);
-    });
-
-    featuredCurrentIndex = 0;
-    updateFeaturedCarousel();
-  }
-
-  function updateFeaturedCarousel() {
-    if (!featuredCarousel) return;
-
-    const slides = featuredCarousel.children;
-    if (!slides.length) return;
-
-    if (featuredCurrentIndex < 0) {
-      featuredCurrentIndex = slides.length - 1;
-    } else if (featuredCurrentIndex > slides.length - 1) {
-      featuredCurrentIndex = 0;
-    }
-
-    // largura de um card + o gap (16px do CSS)
-    const firstSlide = slides[0];
-    const slideWidth = firstSlide.getBoundingClientRect().width + 16;
-
-    const offset = slideWidth * featuredCurrentIndex;
-
-    featuredCarousel.scrollTo({
-      left: offset,
-      behavior: "smooth",
-    });
-
-    const prevBtn = document.getElementById("featuredPrev");
-    const nextBtn = document.getElementById("featuredNext");
-
-    if (prevBtn && nextBtn) {
-      const disabled = slides.length <= 1;
-      prevBtn.disabled = disabled;
-      nextBtn.disabled = disabled;
+      return "";
+    } catch {
+      return "";
     }
   }
 
-  function setupFeaturedCarouselNavigation() {
-    const prevBtn = document.getElementById("featuredPrev");
-    const nextBtn = document.getElementById("featuredNext");
-
-    if (!prevBtn || !nextBtn || !featuredCarousel) return;
-
-    prevBtn.addEventListener("click", () => {
-      const total = featuredCarousel.children.length;
-      if (!total) return;
-      featuredCurrentIndex = (featuredCurrentIndex - 1 + total) % total;
-      updateFeaturedCarousel();
-    });
-
-    nextBtn.addEventListener("click", () => {
-      const total = featuredCarousel.children.length;
-      if (!total) return;
-      featuredCurrentIndex = (featuredCurrentIndex + 1) % total;
-      updateFeaturedCarousel();
-    });
-
-    window.addEventListener("resize", updateFeaturedCarousel);
+  // ===== Helpers para a "página" do vídeo (modal) =====
+  function escapeHtml(str) {
+    return String(str ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
   }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add("is-visible");
+
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => {
+      toast.classList.remove("is-visible");
+    }, 1700);
+  }
+
+  async function copyToClipboard(text) {
+    const value = String(text || "");
+    if (!value) {
+      showToast("Link indisponível.");
+      return;
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = value;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        ta.style.top = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      showToast("Link copiado!");
+    } catch {
+      showToast("Não foi possível copiar.");
+    }
+  }
+
+  function getTipsForVideo(video) {
+    const raw = `${video.categoria || ""} ${video.titulo || ""} ${video.descricao || ""}`.toLowerCase();
+
+    if (raw.includes("sem acesso") || raw.includes("sem internet") || raw.includes("sem conexão") || raw.includes("sem conexao")) {
+      return [
+        "Confira cabos (ONU/roteador) e se há LEDs apagados.",
+        "Reinicie modem/roteador (desligue 10s e ligue).",
+        "Teste em outro dispositivo antes de abrir chamado."
+      ];
+    }
+
+    if (raw.includes("internet lenta") || raw.includes("lentidão") || raw.includes("lentidao")) {
+      return [
+        "Compare Wi‑Fi vs cabo (se possível).",
+        "Aproxime do roteador e prefira 5GHz quando disponível.",
+        "Verifique quantidade de dispositivos conectados."
+      ];
+    }
+
+    if (raw.includes("teste de velocidade") || raw.includes("velocidade") || raw.includes("speed")) {
+      return [
+        "Feche downloads/streaming antes do teste.",
+        "Use servidor mais próximo e repita 2–3 vezes.",
+        "Avalie download, upload e ping em horários diferentes."
+      ];
+    }
+
+    if (raw.includes("wi-fi") || raw.includes("wifi") || raw.includes("2.4") || raw.includes("5g") || raw.includes("rede")) {
+      return [
+        "2.4GHz = mais alcance | 5GHz = mais velocidade.",
+        "Evite obstáculos (paredes/metais) entre roteador e cliente.",
+        "Se houver interferência, altere canal ou posição do roteador."
+      ];
+    }
+
+    if (raw.includes("financeiro") || raw.includes("boleto") || raw.includes("fatura") || raw.includes("2ª via") || raw.includes("2a via")) {
+      return [
+        "Acesse a Central do Assinante para 2ª via e pagamentos.",
+        "Confira vencimento e se houve compensação bancária.",
+        "Em caso de baixa pendente, aguarde e valide no sistema."
+      ];
+    }
+
+    return [];
+  }
+
+  function renderRelatedVideos(currentVideo, container) {
+    if (!container) return;
+
+    const currentCat = String(currentVideo?.categoria || "").toLowerCase();
+
+    const related = videos
+      .filter((v) => v && v !== currentVideo)
+      .map((v) => {
+        const cat = String(v.categoria || "").toLowerCase();
+        const same = cat && currentCat && cat === currentCat;
+        return { v, score: same ? 10 : 0 };
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6)
+      .map((x) => x.v);
+
+    if (!related.length) {
+      container.innerHTML = `<div class="video-modal__related-hint">Sem vídeos relacionados por enquanto.</div>`;
+      return;
+    }
+
+    container.innerHTML = related
+      .map((v) => {
+        const theme = getVideoThumbTheme(v);
+        const primary = getPrimaryEmoji(v);
+        const cat = v.categoria || "Tutorial PRESTEK";
+        const title = v.titulo || "Vídeo";
+        return `
+          <button
+            type="button"
+            class="related-card"
+            style="--thumb-a:${theme.a}; --thumb-b:${theme.b}; --thumb-c:${theme.c};"
+            aria-label="Abrir relacionado: ${escapeHtml(title)}"
+          >
+            <div class="related-card__thumb">
+              <div class="related-card__emoji" aria-hidden="true">${primary}</div>
+            </div>
+            <div class="related-card__body">
+              <div class="related-card__cat">${escapeHtml(cat)}</div>
+              <div class="related-card__title">${escapeHtml(title)}</div>
+            </div>
+          </button>
+        `;
+      })
+      .join("");
+
+    // clique
+    const buttons = container.querySelectorAll(".related-card");
+    buttons.forEach((btn, i) => {
+      btn.addEventListener("click", () => openVideoModal(related[i]));
+    });
+  }
+
+
+
+function openVideoModal(video) {
+  const modal = document.getElementById("videoModal");
+  const iframe = document.getElementById("videoIframe");
+  const title = document.getElementById("videoModalTitle");
+  const kicker = document.getElementById("videoModalKicker");
+  const desc = document.getElementById("videoModalDescription");
+  const external = document.getElementById("videoModalExternal");
+  const copyBtn = document.getElementById("videoModalCopy");
+  const durationEl = document.getElementById("videoModalDuration");
+  const categoryEl = document.getElementById("videoModalCategory");
+  const tipsWrap = document.getElementById("videoModalTipsWrap");
+  const tipsList = document.getElementById("videoModalTips");
+  const relatedGrid = document.getElementById("videoModalRelatedGrid");
+
+  if (!modal || !iframe) {
+    alert("Visualização de vídeo não encontrada no HTML (#videoModal / #videoIframe).");
+    return;
+  }
+
+  // Guarda foco para devolver ao fechar (acessibilidade)
+  window.__lastFocusEl = document.activeElement;
+
+  const youtubeId = getYouTubeId(video.driveUrl);
+  if (!youtubeId) {
+    alert("Link do YouTube inválido. Verifique o driveUrl do vídeo.");
+    return;
+  }
+
+  // Título / conteúdo
+  if (title) title.textContent = video.titulo || "Vídeo";
+  if (desc) desc.textContent = video.descricao || "Assista ao vídeo para ver o passo a passo.";
+
+  // Kicker (emoji + categoria + duração)
+  const emoji = getPrimaryEmoji(video);
+  const cat = video.categoria || "Tutorial PRESTEK";
+  const dur = video.duracao || "";
+
+  if (kicker) {
+    kicker.innerHTML = `
+      <span class="kicker-emoji" aria-hidden="true">${emoji}</span>
+      <span class="kicker-pill">${escapeHtml(cat)}</span>
+      ${dur ? `<span class="kicker-pill kicker-pill--soft">${escapeHtml(dur)}</span>` : ""}
+    `;
+  }
+
+  // Meta pills abaixo do player
+  if (durationEl) {
+    if (dur) {
+      durationEl.textContent = dur;
+      durationEl.hidden = false;
+    } else durationEl.hidden = true;
+  }
+
+  if (categoryEl) {
+    if (cat) {
+      categoryEl.textContent = cat;
+      categoryEl.hidden = false;
+    } else categoryEl.hidden = true;
+  }
+
+  // Link externo + copiar
+  if (external) external.href = video.driveUrl || "#";
+  if (copyBtn) {
+    copyBtn.onclick = () => copyToClipboard(video.driveUrl || "");
+  }
+
+  // Dicas rápidas (opcional)
+  const tips = getTipsForVideo(video);
+  if (tipsWrap && tipsList) {
+    if (tips && tips.length) {
+      tipsList.innerHTML = tips.map((t) => `<li>${escapeHtml(t)}</li>`).join("");
+      tipsWrap.hidden = false;
+    } else {
+      tipsWrap.hidden = true;
+      tipsList.innerHTML = "";
+    }
+  }
+
+  // Embed mais “limpo” (nocookie)
+  const src =
+    `https://www.youtube-nocookie.com/embed/${youtubeId}` +
+    `?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3`;
+
+  iframe.src = src;
+
+  // Abre
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  // Relacionados
+  if (relatedGrid) {
+    renderRelatedVideos(video, relatedGrid);
+  }
+
+  // Coloca o foco no botão de voltar (melhor UX no teclado)
+  const backBtn = modal.querySelector(".video-modal__back");
+  if (backBtn) backBtn.focus();
+
+  // Deep-link no hash (#v=INDEX)
+  const idx = videos.findIndex((v) => v === video);
+  if (idx >= 0) {
+    try {
+      history.replaceState(null, "", `#v=${idx}`);
+    } catch (_) {}
+  }
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById("videoModal");
+  const iframe = document.getElementById("videoIframe");
+
+  if (modal) {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  // Para o áudio e libera recursos
+  if (iframe) iframe.src = "";
+
+  // destrava scroll do fundo
+  document.body.classList.remove("modal-open");
+
+  // Remove deep-link do hash (se foi aberto por #v=)
+  if (location.hash && location.hash.startsWith("#v=")) {
+    try {
+      history.replaceState(null, "", location.pathname + location.search);
+    } catch (_) {}
+  }
+
+  // Devolve o foco (acessibilidade)
+  if (window.__lastFocusEl && typeof window.__lastFocusEl.focus === "function") {
+    window.__lastFocusEl.focus();
+  }
+  window.__lastFocusEl = null;
+}
+
+// Fechar com ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeVideoModal();
+});
+
+
+  /*
+   * "Comece por aqui" (carrossel) — DESATIVADO
+   * Código removido/comentado para não aparecer na página.
+   */
+
 
   const themeToggleBtn = document.getElementById("themeToggle");
   const themeIcon = themeToggleBtn
@@ -1742,48 +2803,170 @@ footer a:hover {
     ? themeToggleBtn.querySelector(".theme-label")
     : null;
 
-  // Agora, "renderVideos" controla apenas o carrossel (e contagem de vídeos)
-  function renderVideos(lista) {
-    if (!lista || !lista.length) {
-      if (videoCount) {
-        videoCount.textContent = "(0 vídeos)";
-      }
-      if (emptyState) {
-        emptyState.style.display = "block";
-      }
-      if (featuredCarousel) {
-        featuredCarousel.innerHTML = "";
-      }
-      const section = document.querySelector(".featured-section");
-      if (section) section.style.display = "none";
-      return;
-    }
+  
+  // Emoji por tipo de problema (pode ser sobrescrito com video.emoji)
+  function getVideoEmoji(video) {
+    const raw = `${video.categoria || ""} ${video.titulo || ""} ${(video.descricao || "")}`.toLowerCase();
 
-    if (emptyState) {
-      emptyState.style.display = "none";
-    }
+    // Mais específicos primeiro
+    if (raw.includes("sem acesso") || raw.includes("sem internet") || raw.includes("sem conexão") || raw.includes("sem conexao")) return "🚫🌐";
+    if (raw.includes("internet lenta") || raw.includes("lentidão") || raw.includes("lentidao")) return "🐢";
+    if (raw.includes("teste de velocidade") || raw.includes("velocidade") || raw.includes("speedtest") || raw.includes("download") || raw.includes("upload") || raw.includes("ping")) return "⚡";
+    if (raw.includes("wi-fi") || raw.includes("wifi") || raw.includes("rede") || raw.includes("2.4") || raw.includes("5g") || raw.includes("roteador") || raw.includes("roteador")) return "📶";
+    if (raw.includes("financeiro") || raw.includes("boleto") || raw.includes("2ª via") || raw.includes("2a via") || raw.includes("fatura") || raw.includes("pagamento") || raw.includes("cobran")) return "🧾";
+    if (raw.includes("suporte") || raw.includes("atendimento") || raw.includes("chamado") || raw.includes("ticket")) return "🛠️";
 
-    if (videoCount) {
-      videoCount.textContent =
-        lista.length === 1
-          ? "(1 vídeo disponível)"
-          : `(${lista.length} vídeos disponíveis)`;
-    }
-
-    const section = document.querySelector(".featured-section");
-    if (section) section.style.display = "";
-
-    renderFeaturedVideos(lista);
+    return "🎬";
   }
 
-  function filtrarVideos(termo) {
+function splitGraphemes(input) {
+  const str = (input || "").toString().trim();
+  if (!str) return [];
+
+  try {
+    if (typeof Intl !== "undefined" && Intl.Segmenter) {
+      const seg = new Intl.Segmenter("pt", { granularity: "grapheme" });
+      return Array.from(seg.segment(str), (s) => s.segment).filter(Boolean);
+    }
+  } catch (_) {
+    // fallback abaixo
+  }
+
+  return Array.from(str);
+}
+
+// Paleta do topo (thumb) por tema/problema — deixa os cards menos “mortos”
+function getVideoThumbTheme(video) {
+  const raw = `${video.categoria || ""} ${video.titulo || ""} ${(video.descricao || "")}`.toLowerCase();
+
+  if (raw.includes("sem acesso") || raw.includes("sem internet") || raw.includes("sem conexão") || raw.includes("sem conexao")) {
+    return { a: "#fb7185", b: "#fb923c", c: "#e11d48" }; // rosa/laranja/vermelho
+  }
+  if (raw.includes("internet lenta") || raw.includes("lentidão") || raw.includes("lentidao")) {
+    return { a: "#fbbf24", b: "#fb923c", c: "#f97316" }; // amarelo/laranja
+  }
+  if (raw.includes("teste de velocidade") || raw.includes("velocidade") || raw.includes("speedtest") || raw.includes("download") || raw.includes("upload") || raw.includes("ping")) {
+    return { a: "#60a5fa", b: "#a78bfa", c: "#f472b6" }; // azul/roxo/rosa
+  }
+  if (raw.includes("wi-fi") || raw.includes("wifi") || raw.includes("rede") || raw.includes("2.4") || raw.includes("5g") || raw.includes("roteador")) {
+    return { a: "#22c1d6", b: "#60a5fa", c: "#1d4ed8" }; // teal/azul
+  }
+  if (raw.includes("financeiro") || raw.includes("boleto") || raw.includes("2ª via") || raw.includes("2a via") || raw.includes("fatura") || raw.includes("pagamento") || raw.includes("cobran")) {
+    return { a: "#34d399", b: "#22c55e", c: "#16a34a" }; // verde
+  }
+  if (raw.includes("suporte") || raw.includes("atendimento") || raw.includes("chamado") || raw.includes("ticket")) {
+    return { a: "#94a3b8", b: "#22c1d6", c: "#1d4ed8" }; // cinza/teal/azul
+  }
+
+  return { a: "#fb923c", b: "#f97316", c: "#e11d48" };
+}
+
+function getEmojiHtml(video) {
+  const emojiStr = video.emoji || getVideoEmoji(video);
+  const parts = splitGraphemes(emojiStr);
+  return parts.map((e) => `<span>${e}</span>`).join("");
+}
+
+function getPrimaryEmoji(video) {
+  const emojiStr = video.emoji || getVideoEmoji(video);
+  const parts = splitGraphemes(emojiStr);
+  return (parts && parts.length) ? parts[0] : "❔";
+}
+
+  // Renderiza a grade (todos os tutoriais)
+function renderGridVideos(lista) {
+  if (!videosGrid) return;
+
+  videosGrid.innerHTML = "";
+
+  lista.forEach((video) => {
+    const card = document.createElement("article");
+    card.className = "video-card";
+
+    const theme = getVideoThumbTheme(video);
+    const thumbStyle = `--thumb-a:${theme.a}; --thumb-b:${theme.b}; --thumb-c:${theme.c};`;
+    const emojiHtml = getEmojiHtml(video);
+
+    
+    const primaryEmoji = getPrimaryEmoji(video);
+card.innerHTML = `
+      <button
+        type="button"
+        class="video-link"
+        style="border:0; background:transparent; padding:0; text-align:left; cursor:pointer; width:100%; font:inherit;"
+        aria-label="Abrir vídeo: ${video.titulo}"
+      >
+        <div class="video-thumb-wrapper" style="${thumbStyle}">
+          <div class="video-thumb-bg-emoji" aria-hidden="true">${primaryEmoji}</div>
+
+          <div class="video-thumb-emoji-float" aria-hidden="true">
+            <div class="video-thumb-emoji">
+              ${emojiHtml}
+            </div>
+          </div>
+
+          <div class="video-play-pill">
+            <span>⏵</span> ${video.duracao || "Ver vídeo"}
+          </div>
+          ${video.novo ? '<span class="badge-new">Novo</span>' : ""}
+        </div>
+
+        <div class="video-body">
+          <div class="video-category"><span class="video-category-text">${video.categoria || "Tutorial PRESTEK"}</span>
+          </div>
+          <h3 class="video-title">${video.titulo}</h3>
+          ${
+            video.descricao
+              ? `<p class="video-description">${video.descricao}</p>`
+              : ""
+          }
+        </div>
+      </button>
+    `;
+
+    const btn = card.querySelector(".video-link");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        openVideoModal(video);
+      });
+    }
+
+    videosGrid.appendChild(card);
+  });
+}
+
+// Featured + grade + contagem + empty state
+function renderVideos(lista, options = {}) {
+  // A seção "Comece por aqui" foi desativada.
+  // Mantemos a assinatura (options) apenas para não quebrar chamadas existentes.
+
+  if (!lista || !lista.length) {
+    if (videoCount) videoCount.textContent = "(0 vídeos)";
+    if (emptyState) emptyState.style.display = "block";
+    renderGridVideos([]);
+    return;
+  }
+
+  if (emptyState) emptyState.style.display = "none";
+
+  if (videoCount) {
+    videoCount.textContent =
+      lista.length === 1
+        ? "(1 vídeo disponível)"
+        : `(${lista.length} vídeos disponíveis)`;
+  }
+
+  renderGridVideos(lista);
+}
+
+function filtrarVideos(termo) {
     const termoNormalizado = termo.trim().toLowerCase();
 
     if (!termoNormalizado) {
       if (searchClear) {
         searchClear.classList.remove("visible");
       }
-      renderVideos(videos);
+      renderVideos(videos, { hideFeatured: false });
       return;
     }
 
@@ -1803,7 +2986,7 @@ footer a:hover {
       );
     });
 
-    renderVideos(filtrados);
+    renderVideos(filtrados, { hideFeatured: true });
   }
 
   if (searchInput) {
@@ -1868,8 +3051,8 @@ footer a:hover {
   })();
 
   // Render inicial: todos os vídeos no carrossel
-  renderVideos(videos);
-  setupFeaturedCarouselNavigation();
+  renderVideos(videos, { hideFeatured: false });
+  // setupFeaturedCarouselNavigation(); // desativado (Comece por aqui)
 
   // Feedback "Esse conteúdo foi útil?"
   const feedbackButtons = document.querySelectorAll(".feedback-btn");
@@ -1987,4 +3170,30 @@ footer a:hover {
   }
 
   setupLinkLoader();
+
+
+  // Abrir direto por hash (#v=INDEX) — útil para compartilhar/atalho
+  function openFromHash() {
+    const h = String(location.hash || "");
+    if (!h.startsWith("#v=")) return;
+    const idx = parseInt(h.slice(3), 10);
+    if (!Number.isNaN(idx) && videos[idx]) {
+      openVideoModal(videos[idx]);
+    }
+  }
+
+  window.addEventListener("load", () => {
+    if (String(location.hash || "").startsWith("#v=")) {
+      setTimeout(openFromHash, 60);
+    }
+  });
+
+  window.addEventListener("hashchange", () => {
+    if (String(location.hash || "").startsWith("#v=")) {
+      openFromHash();
+    }
+  });
+
 </script>
+</body>
+</html>

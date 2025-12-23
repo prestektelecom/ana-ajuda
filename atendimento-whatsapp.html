@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Atendimento – Problemas de Conexão | PRESTEK Telecom</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Atendimento PRESTEK Telecom para problemas de conexão (sem acesso, lentidão e instabilidade), com links úteis e contato via WhatsApp ou ligação." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -13,35 +14,37 @@
 
 <style>
 :root {
-  /* Fundo dark, puxando mais para azul oceano */
---bg-gradient: radial-gradient(
-  circle at top,
-  #0b2948 0,
-  #061525 45%,
-  #020617 100%
-);
+  /* Opção C — Quente e amigável */
+  --bg-gradient: radial-gradient(circle at top, #FFF7ED 0%, #FFEDD5 55%, #FFFFFF 100%);
 
+  /* Superfícies */
+  --card-bg: #FFFFFF;
+  --card-border: #E5E7EB;
 
-  /* Cards escuros levemente mais azuis */
-  --card-bg: #020a17;
-  --card-border: rgba(30, 64, 175, 0.6); /* indigo discreto */
-
-  /* Acento ciano/teal (mantém clima tech) */
-  --accent: #22c1d6;
-  --accent-soft: rgba(34, 193, 214, 0.2);
+  /* Acentos */
+  --accent: #F97316; /* laranja (primária) */
+  --accent-2: #0EA5E9; /* azul (secundária / foco) */
+  --accent-soft: rgba(249, 115, 22, 0.16);
+  --accent2-soft: rgba(14, 165, 233, 0.14);
 
   /* Textos */
-  --text-main: #e5e7eb;
-  --text-soft: #94a3b8;
-  --text-strong: #f9fafb;
+  --text-main: #1F2937;
+  --text-soft: #6B7280;
+  --text-strong: #111827;
 
   /* Chips / pílulas */
-  --chip-bg: rgba(9, 16, 35, 0.96);
+  --chip-bg: #FFEDD5;
+
+  /* WhatsApp */
+  --whatsapp: #22c55e;
+  --whatsapp-dark: #16a34a;
+
+  /* Sombra padrão */
+  --shadow: 0 18px 40px rgba(17, 24, 39, 0.08);
 }
 
 
-
-  * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -61,9 +64,9 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    background: linear-gradient(90deg, #020617, #020917);
-    border-bottom: 1px solid rgba(75, 85, 99, 0.9); /* linha neutra/slate */
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+    background: rgba(255, 247, 237, 0.92);
+    border-bottom: 1px solid var(--card-border);
+    box-shadow: 0 12px 30px rgba(17, 24, 39, 0.10);
     backdrop-filter: blur(14px);
   }
 
@@ -126,7 +129,7 @@
     padding: 6px 10px;
     border-radius: 999px;
     background: var(--chip-bg);
-    border: 1px solid rgba(148, 163, 184, 0.6); /* contorno slate */
+    border: 1px solid var(--card-border);
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -152,7 +155,7 @@
       rgba(34, 197, 94, 0.22),
       rgba(34, 197, 94, 0.05)
     );
-    color: #bbf7d0;
+    color: #14532d;
   }
 
   .whatsapp-mini-text {
@@ -261,14 +264,14 @@
 .hero-card {
   background: linear-gradient(
     145deg,
-    rgba(2, 8, 23, 0.98),
-    rgba(2, 12, 27, 0.98)
+    rgba(255, 255, 255, 0.98),
+    rgba(255, 251, 235, 0.98)
   );
   border-radius: 18px;
-  border: 1px solid rgba(20, 184, 165, 0.337); /* borda em teal (accent) */
+  border: 1px solid rgba(249, 115, 22, 0.35); /* borda laranja suave */
   padding: 16px 18px;
   max-width: 320px;
-  box-shadow: 0 18px 40px rgba(20, 184, 165, 0.232);
+  box-shadow: 0 18px 40px rgba(249, 115, 22, 0.10);
   font-size: 0.82rem
 }
 
@@ -345,7 +348,7 @@
   border-radius: 18px;
   border: 1px solid var(--card-border);
   padding: 16px 16px 18px;
-  box-shadow: 0 18px 40px rgba(5, 218, 242, 0.137);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -362,7 +365,7 @@
   padding: 4px 9px;
   border-radius: 999px;
   background: var(--chip-bg);
-  border: 1px solid rgba(20, 184, 166, 0.6); /* contorno teal */
+  border: 1px solid rgba(249, 115, 22, 0.55); /* contorno laranja */
   color: var(--text-soft);
 }
 
@@ -393,7 +396,7 @@
   font-size: 0.8rem;
   padding: 8px 10px;
   border-radius: 10px;
-  background: rgba(2, 8, 23, 0.96);
+  background: rgba(255, 247, 237, 0.92);
   border: 1px dashed var(--accent); /* teal */
   color: var(--text-main);
 }
@@ -407,14 +410,14 @@ a.whatsapp-btn {
   gap: 10px;
   padding: 10px 18px;
   border-radius: 999px;
-  border: 1px solid rgba(20, 184, 166, 0.7);
+  border: 1px solid rgba(34, 197, 94, 0.45);
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none !important;
-  background: linear-gradient(90deg, var(--accent), #0f766e);
-  color: #ecfeff !important;
-  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.5);
+  background: linear-gradient(90deg, var(--whatsapp), var(--whatsapp-dark));
+  color: #F0FDF4 !important;
+  box-shadow: 0 14px 30px rgba(34, 197, 94, 0.25);
   transition:
     transform 0.12s ease,
     box-shadow 0.12s ease,
@@ -425,12 +428,12 @@ a.whatsapp-btn {
 a.whatsapp-btn:hover {
   transform: translateY(-1px);
   filter: brightness(1.04);
-  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.7);
+  box-shadow: 0 18px 40px rgba(34, 197, 94, 0.30);
 }
 
 a.whatsapp-btn:active {
   transform: translateY(0);
-  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+  box-shadow: 0 10px 22px rgba(34, 197, 94, 0.22);
 }
 
 /* Botões de ação gerais (não WhatsApp) – teal */
@@ -441,14 +444,14 @@ a.cta-btn {
   gap: 10px;
   padding: 10px 18px;
   border-radius: 999px;
-  border: 1px solid rgba(20, 184, 166, 0.7);
+  border: 1px solid rgba(249, 115, 22, 0.55);
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none !important;
-  background: linear-gradient(90deg, var(--accent), #0f766e);
-  color: #ecfeff !important;
-  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.5);
+  background: linear-gradient(90deg, var(--accent), #ea580c);
+  color: #FFFBEB !important;
+  box-shadow: 0 14px 30px rgba(249, 115, 22, 0.25);
   transition:
     transform 0.12s ease,
     box-shadow 0.12s ease,
@@ -459,13 +462,13 @@ a.cta-btn {
 a.cta-btn:hover {
   transform: translateY(-1px);
   filter: brightness(1.04);
-  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.7);
+  box-shadow: 0 18px 40px rgba(249, 115, 22, 0.30);
   text-decoration: none;
 }
 
 a.cta-btn:active {
   transform: translateY(0);
-  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.6);
+  box-shadow: 0 10px 22px rgba(249, 115, 22, 0.22);
 }
 
 /* Ícone dentro dos botões gerais (nPerf, artigo, voltar, etc.) */
@@ -473,12 +476,12 @@ a.cta-btn:active {
   width: 30px;
   height: 30px;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.96);
+  background: rgba(255, 255, 255, 0.96);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.4);
+  box-shadow: 0 4px 10px rgba(17, 24, 39, 0.08);
 }
 
 /* Textos dos botões gerais */
@@ -544,12 +547,12 @@ a.cta-btn:active {
 .whatsapp-btn:hover {
   transform: translateY(-1px);
   filter: brightness(1.04);
-  box-shadow: 0 18px 40px rgba(38, 105, 63, 0.9);
+  box-shadow: 0 18px 40px rgba(34, 197, 94, 0.30);
 }
 
 .whatsapp-btn:active {
   transform: translateY(0);
-  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.8);
+  box-shadow: 0 10px 22px rgba(34, 197, 94, 0.22);
 }
 
 /* ícone do WhatsApp dentro do botão (caso use imagem em vez de emoji) */
@@ -608,7 +611,7 @@ a.cta-btn:active {
   padding: 4px 8px;
   border-radius: 999px;
   background: var(--chip-bg);
-  border: 1px solid rgba(20, 184, 166, 0.7); /* accent teal */
+  border: 1px solid rgba(249, 115, 22, 0.55); /* accent teal */
 }
 
 .support-tag {
@@ -621,7 +624,7 @@ footer {
   color: var(--text-soft);
   padding: 10px 16px 18px;
   text-align: center;
-  border-top: 1px solid rgba(75, 85, 99, 0.85); /* linha neutra/slate */
+  border-top: 1px solid var(--card-border);
   margin-top: 8px;
 }
 
@@ -672,9 +675,575 @@ footer a:hover {
     text-align: left;
   }
 }
+/* Acessibilidade: pular para conteúdo */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--text-strong);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  text-decoration: none;
+  z-index: 9999;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Foco visível (teclado) */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.55);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* Barra de ações fixa no mobile (WhatsApp / Ligar) */
+.bottom-actions {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .bottom-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 50;
+  }
+
+  .bottom-actions a {
+    justify-content: center !important;
+    text-align: center;
+  }
+
+  /* espaço no final para não cobrir conteúdo */
+  main {
+    padding-bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+
+  footer {
+    margin-bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+}
+
+/* reduz animações se o usuário pedir */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ================================
+   Melhorias: menos texto, mais ação
+   ================================ */
+
+.lead{
+  font-size: 1.03rem;
+  color: var(--text-main);
+  max-width: 66ch;
+}
+
+.steps-inline{
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.steps-inline li{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 10px 12px;
+  color: var(--text-main);
+  box-shadow: var(--shadow);
+}
+
+.step-badge{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-strong);
+  border: 1px solid var(--card-border);
+  flex: 0 0 auto;
+}
+
+/* Botões enxutos */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+  box-shadow: var(--shadow);
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+}
+
+.btn:active{
+  transform: translateY(0px);
+  box-shadow: none;
+}
+
+.btn-ico{
+  line-height: 1;
+}
+
+.btn-primary{
+  background: var(--accent);
+  color: #fff;
+  border-color: rgba(0,0,0,0.04);
+}
+
+.btn-primary:hover{
+  background: var(--accent-dark);
+}
+
+.btn-outline{
+  background: #fff;
+  color: var(--text-strong);
+  border-color: var(--card-border);
+}
+
+.btn-outline:hover{
+  background: rgba(255,255,255,0.85);
+}
+
+.btn-whatsapp{
+  background: var(--whatsapp);
+  color: #fff;
+  border-color: rgba(0,0,0,0.04);
+}
+
+.btn-whatsapp:hover{
+  background: var(--whatsapp-dark);
+}
+
+.btn-whatsapp-outline{
+  background: #fff;
+  color: var(--whatsapp-dark);
+  border-color: rgba(34,197,94,0.35);
+}
+
+.btn-whatsapp-outline:hover{
+  background: rgba(34,197,94,0.08);
+}
+
+/* Hero card refinado */
+.hero-card-actions{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+
+.span-2{ grid-column: 1 / -1; }
+.hero-mini{
+  margin-top: 12px;
+  background: rgba(255,247,237,0.72);
+  border: 1px dashed rgba(249,115,22,0.35);
+  border-radius: 16px;
+  padding: 12px 12px;
+}
+
+.hero-mini-title{
+  font-weight: 700;
+  color: var(--text-strong);
+  margin-bottom: 6px;
+}
+
+.mini-list{
+  margin: 0 0 0 18px;
+  color: var(--text-main);
+}
+
+/* Seções enxutas */
+.section{
+  margin-top: 22px;
+}
+
+.section-head{
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.section-head h2{
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--text-strong);
+}
+
+.section-desc{
+  margin: 0;
+  color: var(--text-soft);
+  max-width: 70ch;
+}
+
+/* Cartões de assunto */
+.topic-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.topic-card{
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.topic-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  border: 1px solid rgba(0,0,0,0.04);
+  color: var(--text-strong);
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.topic-card h3{
+  margin: 10px 0 6px;
+  color: var(--text-strong);
+}
+
+.topic-desc{
+  margin: 0 0 12px;
+  color: var(--text-main);
+}
+
+.topic-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.topic-actions .btn{
+  flex: 1 1 160px;
+}
+
+.topic-hint{
+  margin: 10px 0 0;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+
+/* FAQ (details/summary) */
+.faq-list{
+  display: grid;
+  gap: 12px;
+}
+
+.faq-list details{
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+}
+
+.faq-list summary{
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--text-strong);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.faq-list summary::-webkit-details-marker{
+  display: none;
+}
+
+.faq-list summary::after{
+  content: "▾";
+  font-size: 0.95rem;
+  color: var(--text-soft);
+}
+
+.faq-list details[open] summary::after{
+  content: "▴";
+}
+
+.faq-list ul{
+  margin: 10px 0 0 18px;
+  color: var(--text-main);
+}
+
+.faq-link{
+  margin: 10px 0 0;
+}
+
+.faq-link a{
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+/* Responsivo */
+@media (max-width: 860px){
+  .hero{
+    grid-template-columns: 1fr;
+  }
+  .hero-card-actions{
+    grid-template-columns: 1fr;
+  }
+  .steps-inline{
+    grid-template-columns: 1fr;
+  }
+  .topic-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================
+   Interatividade extra (clientes bem leigos)
+   ========================================= */
+
+.top-toggle{
+  appearance: none;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+}
+
+.top-toggle:hover{
+  filter: brightness(1.02);
+  border-color: rgba(249, 115, 22, 0.45);
+}
+
+.hero-contact-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 2px;
+}
+
+.mini-action{
+  appearance: none;
+  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.92);
+  color: var(--text-strong);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mini-action:hover{
+  border-color: rgba(14,165,233,0.45);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+  transform: translateY(-1px);
+}
+
+.mini-action:active{
+  transform: translateY(0px);
+  box-shadow: none;
+}
+
+.helper-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 16px;
+}
+
+.helper-card{
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.helper-preview{
+  background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(255,251,235,0.98));
+}
+
+.form-row{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.form-row.two{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-label{
+  font-weight: 800;
+  color: var(--text-strong);
+  font-size: 0.92rem;
+}
+
+.form-input{
+  font: inherit;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  background: #fff;
+  color: var(--text-strong);
+}
+
+
+.field-hint{ font-size: 0.78rem; color: var(--text-soft); margin-top: 6px; }
+.form-input:focus{
+  outline: 3px solid rgba(14, 165, 233, 0.22);
+  border-color: rgba(14, 165, 233, 0.65);
+}
+
+.helper-actions{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+@media (min-width: 700px){
+  .helper-actions{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.helper-links{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.linkish{
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+.linkish:hover{
+  opacity: 0.9;
+}
+
+.preview-head{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.preview-sub{
+  font-size: 0.86rem;
+  color: var(--text-soft);
+}
+
+.preview-box{
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: rgba(255,247,237,0.72);
+  border: 1px dashed rgba(249,115,22,0.35);
+  border-radius: 16px;
+  padding: 12px;
+  min-height: 180px;
+  color: var(--text-main);
+}
+
+.noscript{
+  margin-top: 8px;
+  color: var(--text-soft);
+}
+
+.toast{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  padding: 10px 12px;
+  background: rgba(17, 24, 39, 0.92);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.20);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 999;
+}
+
+.toast.show{
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+/* Texto maior (toggle) */
+body.font-big{
+  font-size: 18px;
+}
+
+body.font-big .hero-text h1{
+  font-size: 1.95rem;
+}
+
+body.font-big .lead{
+  font-size: 1.12rem;
+}
+
+@media (max-width: 860px){
+  .helper-grid{
+    grid-template-columns: 1fr;
+  }
+  .form-row.two{
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header>
     <div class="top-bar">
       <div class="brand">
@@ -697,27 +1266,23 @@ footer a:hover {
 
         <div class="whatsapp-mini">
           <span class="whatsapp-mini-text">
-            <img
-              src="imagens/whatsapp.jpg"
-              alt="WhatsApp"
-              class="whatsapp-mini-icon"
-            />
+            <img src="imagens/whatsapp.jpg" alt="WhatsApp" class="whatsapp-mini-icon" loading="lazy" decoding="async" />
             0800 900 1014 /
-            <img
-              src="imagens/whatsapp.jpg"
-              alt="WhatsApp"
-              class="whatsapp-mini-icon"
-            />
+            <img src="imagens/whatsapp.jpg" alt="WhatsApp" class="whatsapp-mini-icon" loading="lazy" decoding="async" />
             82 3142-9892 – ligações e WhatsApp
           </span>
         </div>
-      </div>
+        <button class="top-chip top-toggle" id="toggleText" type="button" aria-pressed="false" title="Aumentar o tamanho do texto">
+          <span>🔎</span>
+          <span>Texto maior</span>
+        </button>
+</div>
     </div>
   </header>
 
-  <main>
+  <main id="conteudo">
     <nav class="breadcrumbs">
-      <a href="index.html">Central de tutoriais</a>
+      <a href="index.html">Central de vídeos</a>
       <span>›</span>
       <span>Atendimento – problemas de conexão</span>
     </nav>
@@ -731,11 +1296,16 @@ footer a:hover {
 
         <h1>Sem acesso ou internet lenta? Fale agora com o nosso time!</h1>
 
-        <p>
-          Quando a conexão não ajuda, a gente entra em ação. Escolha abaixo o
-          tipo de problema que você está enfrentando e clique no botão para ser
-          atendido no WhatsApp pela equipe da PRESTEK.
+        <p class="lead">
+          Precisa de ajuda com <strong>sem acesso</strong>, <strong>lentidão</strong> ou <strong>quedas</strong>?
+          Fale com nosso suporte pelo WhatsApp ou ligação — e, se puder, já envie as informações básicas para agilizar.
         </p>
+
+        <ol class="steps-inline" aria-label="Como funciona">
+          <li><span class="step-badge">1</span> Chame no WhatsApp</li>
+          <li><span class="step-badge">2</span> Envie assunto + endereço + prints</li>
+          <li><span class="step-badge">3</span> Acompanhe o retorno</li>
+        </ol>
       </div>
 
       <div class="hero-illu">
@@ -745,244 +1315,240 @@ footer a:hover {
             <span class="hero-card-numero">
               0800 900 1014 / 82 3142-9892
             </span>
+          
+          </div>
+          <div class="hero-card-actions">
+            <a class="btn btn-whatsapp" href="https://wa.me/558009001014?text=Ol%C3%A1%2C%20time%20PRESTEK%21%20Estou%20com%20problemas%20de%20conex%C3%A3o%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer" aria-label="Chamar no WhatsApp (0800 900 1014)">
+              <span class="btn-ico">💬</span>
+              <span>WhatsApp 0800 900 1014</span>
+            </a>
+
+            <a class="btn btn-outline btn-whatsapp-outline" href="https://wa.me/558231429892?text=Ol%C3%A1%2C%20time%20PRESTEK%21%20Estou%20com%20problemas%20de%20conex%C3%A3o%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer" aria-label="Chamar no WhatsApp (+55 82 3142-9892)">
+              <span class="btn-ico">💬</span>
+              <span>WhatsApp +55 (82) 3142-9892</span>
+            </a>
+
+            <a class="btn btn-outline span-2" href="tel:08009001014" aria-label="Ligar para 0800 900 1014">
+              <span class="btn-ico">📞</span>
+              <span>Ligar no 0800 900 1014</span>
+            </a>
           </div>
 
-          <p>
-            Esses números são exclusivos para atendimento por ligações e
-            WhatsApp. Utilize sempre que precisar falar com um atendente sobre
-            instabilidade, quedas ou lentidão na sua internet.
-          </p>
-
-          <p class="hero-card-sub">
-            Quanto mais detalhes você enviar, mais rápido conseguimos te ajudar. 😊
-          </p>
+          <div class="hero-mini" aria-label="Informações para agilizar o atendimento">
+            <div class="hero-mini-title">Para agilizar, envie:</div>
+            <ul class="mini-list">
+              <li><strong>Nome</strong> e <strong>endereço/bairro</strong></li>
+              <li>Se é <strong>sem acesso</strong> ou <strong>lentidão</strong></li>
+              <li>Um <strong>print</strong> ou vídeo curto do problema</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="section-title">
-        <h2>Selecione o problema que melhor descreve a situação</h2>
-        <span>
-          Você será direcionado diretamente para o nosso atendimento via WhatsApp.
-        </span>
+
+    
+    
+    <section class="section" id="ajuda-rapida">
+      <div class="section-head">
+        <h2>Ajuda rápida (para quem é bem leigo)</h2>
+        <p class="section-desc">Responda rapidinho e já abra o WhatsApp com uma mensagem pronta. (As informações originais da página continuam abaixo.)</p>
       </div>
 
-      <div class="cards-grid">
-        <!-- Card: Sem acesso -->
-        <article class="support-card">
-          <div class="support-pill">
-            <div class="support-pill-dot"></div>
-            <span>Sem acesso à internet</span>
+      <div class="helper-grid">
+        <div class="helper-card">
+          <form id="waForm" class="helper-form" autocomplete="on">
+            <div class="form-row">
+              <label class="form-label" for="nome">Seu nome</label>
+              <input id="nome" name="nome" class="form-input" placeholder="Ex.: Maria" />
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="bairro">Endereço / bairro</label>
+              <input id="bairro" name="bairro" class="form-input" placeholder="Ex.: Centro, Rua X" />
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="problema">Qual é o problema?</label>
+              <select id="problema" name="problema" class="form-input">
+                <option value="Sem acesso à internet">Sem acesso</option>
+                <option value="Internet lenta/instável">Internet lenta</option>
+                <option value="Internet caindo (quedas)">Internet caindo</option>
+                <option value="Wi‑Fi fraco / não pega bem">Wi‑Fi fraco</option>
+                <option value="Boleto / pagamentos">Boleto / pagamentos</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            
+            <div class="form-row">
+              <label class="form-label" for="waNumero">Enviar pelo WhatsApp de qual número?</label>
+              <select id="waNumero" name="waNumero" class="form-input">
+                <option value="0800"> +55 (82) 3142-9892 </option>
+                <option value="82" selected>0800 900 1014</option>
+              </select>
+              <div class="field-hint">Se um número não abrir, tente o outro.</div>
+            </div>
+<div class="form-row two">
+              <div>
+                <label class="form-label" for="quando">Quando começou?</label>
+                <input id="quando" name="quando" class="form-input" placeholder="Ex.: hoje de manhã / ontem" />
+              </div>
+              <div>
+                <label class="form-label" for="todos">Acontece em todos os aparelhos?</label>
+                <select id="todos" name="todos" class="form-input">
+                  <option value="Sim">Sim</option>
+                  <option value="Não / só em um aparelho">Não / só em um aparelho</option>
+                  <option value="Não sei">Não sei</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row two">
+              <div>
+                <label class="form-label" for="reiniciou">Você já reiniciou o modem?</label>
+                <select id="reiniciou" name="reiniciou" class="form-input">
+                  <option value="Sim, já reiniciei">Sim</option>
+                  <option value="Ainda não (vou reiniciar agora)">Ainda não</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label" for="print">Você consegue mandar print/vídeo?</label>
+                <select id="print" name="print" class="form-input">
+                  <option value="Sim, posso enviar print/vídeo">Sim</option>
+                  <option value="Não consigo agora">Não</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="helper-actions">
+              <a href="#" id="waOpen" class="btn btn-whatsapp">
+                <span class="btn-ico">💬</span><span>Abrir WhatsApp com mensagem pronta</span>
+              </a>
+
+              <button type="button" id="waCopyMsg" class="btn btn-outline">
+                <span class="btn-ico">📋</span><span>Copiar mensagem</span>
+              </button>
+            </div>
+
+            <div class="helper-links">
+              <button type="button" class="linkish" data-open="faq-checklist">Ver checklist rápido (30s)</button>
+              <a class="linkish" href="https://www.nperf.com/pt/" target="_blank" rel="noopener noreferrer">Abrir teste de velocidade (nPerf)</a>
+              <a class="linkish" href="https://assine.prestek.com.br/boleto" target="_blank" rel="noopener noreferrer">Abrir 2ª via do boleto</a>
+            </div>
+
+            <noscript>
+              <p class="noscript">Dica: seu navegador está com JavaScript desativado. Sem problema — use os botões de WhatsApp/Ligação acima e as “Perguntas rápidas” abaixo.</p>
+            </noscript>
+          </form>
+        </div>
+
+        <div class="helper-card helper-preview" aria-label="Prévia da mensagem">
+          <div class="preview-head">
+            <strong>Prévia do que será enviado</strong>
+            <span class="preview-sub">Você pode copiar ou abrir no WhatsApp.</span>
           </div>
 
-          <h3 class="support-title">Sem acesso – falar com atendente</h3>
+          <pre id="waPreview" class="preview-box"></pre>
 
-          <p class="support-desc">
-            Se os equipamentos estão ligados, mas você continua totalmente sem
-            navegação, nossos atendentes precisam verificar sua conexão em tempo
-            real.
-          </p>
+          <div class="support-callout" style="margin-top:10px">
+            Se preferir, você também pode chamar direto no WhatsApp/ligação pelo topo da página.
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="support-callout">
-            🚀 Não se preocupe, a gente resolve! Clique no botão abaixo, conte o
-            que está acontecendo e deixe o resto com o nosso time de suporte. 💚
+<section class="section">
+      <div class="section-head">
+        <h2>Escolha um assunto</h2>
+        <p class="section-desc">Aqui vai o essencial. Se precisar, as <strong>perguntas rápidas</strong> ficam logo abaixo.</p>
+      </div>
+
+      <div class="topic-grid">
+        <article class="topic-card" id="topic-connection">
+          <div class="topic-pill">🌐 Conexão</div>
+          <h3>Problemas de internet</h3>
+          <p class="topic-desc">Sem acesso, lentidão, quedas ou Wi‑Fi fraco.</p>
+
+          <div class="topic-actions">
+            <a class="btn btn-whatsapp" href="https://wa.me/558009001014?text=Ol%C3%A1%2C%20time%20PRESTEK%21%20Estou%20sem%20acesso%20%C3%A0%20internet%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer">
+              <span class="btn-ico">🚫</span><span>Sem acesso</span>
+            </a>
+            <a class="btn btn-outline btn-whatsapp-outline" href="https://wa.me/558009001014?text=Ol%C3%A1%2C%20time%20PRESTEK%21%20Minha%20internet%20est%C3%A1%20lenta/inst%C3%A1vel%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer">
+              <span class="btn-ico">🐢</span><span>Internet lenta</span>
+            </a>
           </div>
 
-          <a
-            class="whatsapp-btn"
-            href="https://wa.me/558009001014?text=Ol%C3%A1%20time%20PRESTEK%2C%20estou%20sem%20acesso%20%C3%A0%20internet%20e%20preciso%20de%20ajuda."
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="whatsapp-icon">
-              <img src="imagens/whatsapp.jpg" alt="Logo do WhatsApp" />
-            </span>
-
-            <span class="whatsapp-text">
-              <span class="whatsapp-title">Falar com um atendente agora</span>
-              <span class="whatsapp-sub">WhatsApp e ligações:</span>
-              <span class="whatsapp-nums">
-                82 3142-9892<br />
-                0800 900 1014
-              </span>
-            </span>
-          </a>
-
-          <div class="support-footer">
-            <span class="support-badge">Prioridade: alta</span>
-            <span class="support-tag">Sem conexão total</span>
-          </div>
+          <p class="topic-hint">Dica: reinicie o modem (desligue 10s) antes de chamar.</p>
         </article>
 
-        <!-- Card: Internet lenta -->
-        <article class="support-card">
-          <div class="support-pill">
-            <div class="support-pill-dot"></div>
-            <span>Internet lenta ou instável</span>
-          </div>
+        <article class="topic-card" id="topic-finance">
+          <div class="topic-pill">💳 Financeiro</div>
+          <h3>Boleto e pagamentos</h3>
+          <p class="topic-desc">2ª via, vencimento e pagamento.</p>
 
-          <h3 class="support-title">Internet lenta – falar com atendente</h3>
-
-          <p class="support-desc">
-            Páginas demorando para abrir, vídeos travando ou quedas constantes na
-            conexão? Nosso time pode analisar a sua rota, sinal e possíveis
-            oscilações.
-          </p>
-
-          <div class="support-callout">
-            🌟 Não aceite uma internet devagarinho! Fale com a gente no WhatsApp
-            e vamos turbinar a sua conexão juntos. 🚀
-          </div>
-
-          <a
-            class="whatsapp-btn"
-            href="https://wa.me/558009001014?text=Ol%C3%A1%20time%20PRESTEK%2C%20minha%20internet%20est%C3%A1%20lenta%20e%20preciso%20de%20ajuda."
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="whatsapp-icon">
-              <img src="imagens/whatsapp.jpg" alt="Logo do WhatsApp" />
-            </span>
-
-            <span class="whatsapp-text">
-              <span class="whatsapp-title">Falar com um atendente agora</span>
-              <span class="whatsapp-sub">WhatsApp e ligações:</span>
-              <span class="whatsapp-nums">
-                82 3142-9892<br />
-                0800 900 1014
-              </span>
-            </span>
+          <a class="btn btn-primary" href="https://assine.prestek.com.br/boleto" target="_blank" rel="noopener noreferrer">
+            <span class="btn-ico">🧾</span><span>Acessar 2ª via do boleto</span>
           </a>
 
-          <div class="support-footer">
-            <span class="support-badge">Prioridade: média/alta</span>
-            <span class="support-tag">Lentidão / oscilação</span>
-          </div>
-        </article>
-
-        <!-- Card: Pagamento de boleto -->
-        <article class="support-card">
-          <div class="support-pill">
-            <div class="support-pill-dot"></div>
-            <span>2ª via e pagamento de boleto</span>
-          </div>
-
-          <h3 class="support-title">Quero pagar meu boleto</h3>
-
-          <p class="support-desc">
-            Precisa emitir a 2ª via ou realizar o pagamento do seu boleto PRESTEK?
-            Você pode fazer tudo on-line, com segurança, em poucos cliques, pela
-            nossa Central do Assinante.
-          </p>
-
-          <div class="support-callout">
-            💚 Deixe o papel de lado e resolva tudo sem fila e sem ligação!
-            Acesse a Central do Assinante, gere seu boleto na hora e mantenha sua
-            conexão sempre em dia. 😉
-          </div>
-
-          <a
-            class="cta-btn"
-            href="https://assine.prestek.com.br/boleto"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="cta-icon">💳</span>
-
-            <span class="cta-text">
-              <span class="cta-title">Acessar Central do Assinante</span>
-              <span class="cta-sub">2ª via e pagamento on-line</span>
-            </span>
-          </a>
-
-          <div class="support-footer">
-            <span class="support-badge">Autoatendimento</span>
-            <span class="support-tag">2ª via / pagamento de fatura</span>
-          </div>
-        </article>
-
-        <!-- Card: Testar velocidade -->
-        <article class="support-card">
-          <div class="support-pill">
-            <div class="support-pill-dot"></div>
-            <span>Teste de velocidade</span>
-          </div>
-
-          <h3 class="support-title">Como testar a velocidade corretamente</h3>
-
-          <p class="support-desc">
-            Quer saber se a sua internet está entregando a velocidade contratada?
-            Use um teste confiável e acompanhe o desempenho da sua conexão em
-            tempo real.
-          </p>
-
-          <div class="support-callout">
-            🚀 Em poucos segundos você confere se a sua conexão está dentro do esperado.
-            Faça o teste e, se o resultado ficar abaixo do contratado, salve o
-            resultado e fale com o nosso time. 💚
-          </div>
-
-          <a
-            class="cta-btn"
-            href="https://www.nperf.com/pt/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="cta-icon">📈</span>
-            <span class="cta-text">
-              <span class="cta-title">Acessar teste de velocidade</span>
-              <span class="cta-sub">Ferramenta nPerf (abre em nova aba)</span>
-            </span>
-          </a>
-
-          <div class="support-footer">
-            <span class="support-badge">Ferramenta externa</span>
-            <span class="support-tag">Diagnóstico de velocidade</span>
-          </div>
-        </article>
-
-        <!-- Card: Diferença 2.4G x 5G -->
-        <article class="support-card">
-          <div class="support-pill">
-            <div class="support-pill-dot"></div>
-            <span>Diferença entre redes Wi-Fi</span>
-          </div>
-
-          <h3 class="support-title">Diferença entre 2.4G e 5G</h3>
-
-          <p class="support-desc">
-            Fica em dúvida sobre qual rede Wi-Fi usar, 2.4 GHz ou 5 GHz?
-            Entender essa diferença ajuda a ter mais alcance, estabilidade
-            e desempenho nos seus dispositivos.
-          </p>
-
-          <div class="support-callout">
-            📡 Descubra qual rede é a parceira ideal para cada cômodo e para cada
-            tipo de uso (streaming, jogos, reuniões on-line...). Informação simples
-            que faz a sua internet render muito mais. 😉
-          </div>
-
-          <a
-            class="cta-btn"
-            href="https://www.intel.com.br/content/www/br/pt/products/docs/wireless/2-4-vs-5ghz.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="cta-icon">📚</span>
-            <span class="cta-text">
-              <span class="cta-title">Entender 2.4G x 5G</span>
-              <span class="cta-sub">Artigo explicativo</span>
-            </span>
-          </a>
-
-          <div class="support-footer">
-            <span class="support-badge">Conteúdo educativo</span>
-            <span class="support-tag">Wi-Fi 2.4 GHz / 5 GHz</span>
-          </div>
+          <p class="topic-hint">Se o pagamento foi recente, pode levar um tempo para aparecer como compensado.</p>
         </article>
       </div>
     </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Perguntas rápidas</h2>
+        <p class="section-desc">Abra somente o que você precisar (fica bem mais leve).</p>
+      </div>
+
+      <div class="faq-list">
+        <details id="faq-checklist">
+          <summary>Checklist rápido (30 segundos)</summary>
+          <ul>
+            <li>Reinicie o modem/roteador (desligue por 10s e ligue novamente).</li>
+            <li>Confira se os cabos estão firmes (energia e fibra/lan).</li>
+            <li>Teste em outro dispositivo (celular/notebook) para comparar.</li>
+            <li>Se puder, aproxime do roteador ou teste por cabo para tirar dúvida de Wi‑Fi.</li>
+          </ul>
+        </details>
+
+        <details id="faq-info">
+          <summary>Quais informações enviar no WhatsApp?</summary>
+          <ul>
+            <li><strong>Nome</strong> e <strong>endereço/bairro</strong>.</li>
+            <li>Qual o problema: <strong>sem acesso</strong>, <strong>lenta</strong> ou <strong>caindo</strong>.</li>
+            <li>Quando começou (aproximadamente) e se afeta <strong>todos</strong> os dispositivos.</li>
+            <li>Se fizer teste, mande um <strong>print</strong> do resultado.</li>
+          </ul>
+        </details>
+
+        <details id="faq-speed">
+          <summary>Como testar a velocidade corretamente</summary>
+          <ul>
+            <li>Feche downloads/streaming e conecte no <strong>Wi‑Fi 5G</strong> (ou cabo, se tiver).</li>
+            <li>Faça 2 testes e compare os resultados.</li>
+            <li>Salve um print para enviar ao suporte, se necessário.</li>
+          </ul>
+          <p class="faq-link">
+            <a href="https://www.nperf.com/pt/" target="_blank" rel="noopener noreferrer">Abrir teste de velocidade (nPerf)</a>
+          </p>
+        </details>
+
+        <details id="faq-wifi">
+          <summary>2.4G vs 5G: qual rede usar?</summary>
+          <ul>
+            <li><strong>2.4 GHz</strong>: maior alcance, porém costuma ter mais interferência e menor velocidade.</li>
+            <li><strong>5 GHz</strong>: mais velocidade e estabilidade perto do roteador, mas com menor alcance.</li>
+            <li>Para testar velocidade, fique perto do roteador e use <strong>5 GHz</strong> quando possível.</li>
+          </ul>
+          <p class="faq-link">
+            <a href="https://www.intel.com.br/content/www/br/pt/products/docs/wireless/2-4-vs-5ghz.html" target="_blank" rel="noopener noreferrer">Ler explicação (Intel)</a>
+          </p>
+        </details>
+      </div>
+    </section>
+
 
     <section class="section-back">
       <a href="index.html" class="cta-btn">
@@ -995,10 +1561,180 @@ footer a:hover {
     </section>
   </main>
 
-  <footer>
+  
+  <div class="bottom-actions" aria-label="Ações rápidas">
+    <a class="btn btn-whatsapp" href="https://wa.me/558009001014?text=Ol%C3%A1%2C%20time%20PRESTEK%21%20Estou%20com%20problemas%20de%20conex%C3%A3o%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp 0800 900 1014">
+      <span class="btn-ico">💬</span><span>WhatsApp 0800</span>
+    </a>
+    <a class="btn btn-outline btn-whatsapp-outline" href="https://wa.me/558231429892?text=Ol%C3%A1%2C%20time%20PRESTEK%21%20Estou%20com%20problemas%20de%20conex%C3%A3o%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +55 (82) 3142-9892">
+      <span class="btn-ico">💬</span><span>WhatsApp 82</span>
+    </a>
+    <a class="btn btn-outline span-2" href="tel:08009001014" aria-label="Ligar para 0800 900 1014">
+      <span class="btn-ico">📞</span><span>Ligar 0800</span>
+    </a>
+  </div>
+
+<footer>
     Página de apoio ao cliente PRESTEK TELECOM.
     Voltar para a
-    <a href="index.html">Central de Tutoriais</a>.
+    <a href="index.html">Central de vídeos</a>.
   </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script>
+    (function () {
+      const WA_NUMBERS = { "0800": "558009001014", "82": "558231429892" };
+
+      const toastEl = document.getElementById("toast");
+      let toastTimer = null;
+
+      function showToast(message) {
+        if (!toastEl) return;
+        toastEl.textContent = message;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2200);
+      }
+
+      async function copyToClipboard(text) {
+        const value = (text || "").toString();
+        try {
+          await navigator.clipboard.writeText(value);
+          return true;
+        } catch (e) {
+          // fallback (para páginas abertas localmente/sem HTTPS)
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = value;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.top = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+            return true;
+          } catch (err) {
+            return false;
+          }
+        }
+      }
+
+      // Toggle de texto maior (útil para clientes leigos)
+      const toggleTextBtn = document.getElementById("toggleText");
+      if (toggleTextBtn) {
+        const saved = localStorage.getItem("prestek_font_big") === "1";
+        document.body.classList.toggle("font-big", saved);
+        toggleTextBtn.setAttribute("aria-pressed", saved ? "true" : "false");
+
+        toggleTextBtn.addEventListener("click", () => {
+          const on = !document.body.classList.contains("font-big");
+          document.body.classList.toggle("font-big", on);
+          toggleTextBtn.setAttribute("aria-pressed", on ? "true" : "false");
+          localStorage.setItem("prestek_font_big", on ? "1" : "0");
+          showToast(on ? "Texto maior ativado" : "Texto maior desativado");
+        });
+      }
+
+      // Botões "Copiar" (números e mensagem)
+      document.querySelectorAll("[data-copy]").forEach((el) => {
+        el.addEventListener("click", async () => {
+          const ok = await copyToClipboard(el.getAttribute("data-copy"));
+          showToast(ok ? "Copiado!" : "Não foi possível copiar.");
+        });
+      });
+
+      // Abrir itens (FAQ/checklist) com um clique
+      document.querySelectorAll("[data-open]").forEach((el) => {
+        el.addEventListener("click", () => {
+          const id = el.getAttribute("data-open");
+          const target = document.getElementById(id);
+          if (!target) return;
+
+          if (target.tagName && target.tagName.toLowerCase() === "details") {
+            target.open = true;
+          }
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          showToast("Abrindo…");
+        });
+      });
+
+      // Gerador de mensagem do WhatsApp (Ajuda rápida)
+      const form = document.getElementById("waForm");
+      const preview = document.getElementById("waPreview");
+      const openBtn = document.getElementById("waOpen");
+      const copyMsgBtn = document.getElementById("waCopyMsg");
+
+      function val(id) {
+        const el = document.getElementById(id);
+        return (el && el.value ? el.value : "").toString().trim();
+      }
+
+      function buildMessage() {
+        const nome = val("nome");
+        const bairro = val("bairro");
+        const problema = val("problema") || "Problemas de conexão";
+        const quando = val("quando");
+        const todos = val("todos") || "Não sei";
+        const reiniciou = val("reiniciou") || "Não sei";
+        const print = val("print") || "Não sei";
+
+        let msg = "Olá, time PRESTEK! ";
+        if (nome) msg += "Meu nome é " + nome + ". ";
+        if (bairro) msg += "Endereço/bairro: " + bairro + ". ";
+        msg += "Problema: " + problema + ". ";
+        if (quando) msg += "Começou: " + quando + ". ";
+        msg += "Acontece em todos os aparelhos: " + todos + ". ";
+        msg += "Modem reiniciado: " + reiniciou + ". ";
+        msg += "Print/vídeo: " + print + ". ";
+        msg += "Obrigado!";
+        return msg;
+      }
+
+      function updatePreview() {
+        const message = buildMessage();
+        if (preview) preview.textContent = message;
+
+        if (openBtn) {
+          const url = "https://wa.me/" + (WA_NUMBERS[val("waNumero")] || WA_NUMBERS["82"]) + "?text=" + encodeURIComponent(message);
+          openBtn.setAttribute("href", url);
+        }
+      }
+
+      if (form) {
+        form.addEventListener("input", updatePreview);
+        updatePreview();
+      }
+
+      if (openBtn) {
+        openBtn.addEventListener("click", (e) => {
+          // mantém a navegação normal (href) e só dá feedback
+          showToast("Abrindo WhatsApp…");
+        });
+      }
+
+      if (copyMsgBtn) {
+        copyMsgBtn.addEventListener("click", async () => {
+          const ok = await copyToClipboard(buildMessage());
+          showToast(ok ? "Mensagem copiada!" : "Não foi possível copiar.");
+        });
+      }
+
+      // Abrir um item automaticamente via URL (ex.: ?open=faq-checklist)
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const open = params.get("open");
+        if (open) {
+          const target = document.getElementById(open);
+          if (target) {
+            if (target.tagName && target.tagName.toLowerCase() === "details") target.open = true;
+            setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+
 </body>
 </html>
