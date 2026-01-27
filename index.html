@@ -71,7 +71,7 @@
   --color-border: rgba(30, 64, 175, 0.45);
 
   /* Cards */
-  --color-card-bg: #020b16;
+  --color-card-bg: #020b16fb;
   --color-card-shadow: 0 22px 50px rgba(3, 7, 18, 0.95);
 
   /* Tags / chips */
@@ -636,7 +636,7 @@ main {
   box-shadow: 0 10px 24px rgba(14, 165, 233, 0.55);
 }
 
-/* SECUNDÁRIO FORTE – atendimento (também bem chamativo) */
+/* SECUNDÁRIO FORTE – atendimento  */
 .hero-button--support {
   background: linear-gradient(135deg, #0ea5e9, #0f766e);
   border-color: rgba(45, 212, 191, 0.9);
@@ -1593,6 +1593,28 @@ footer a:hover {
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.35);
 }
 
+
+
+/* LIGHT (tema claro): CTA Atendimento em laranja chamativo */
+:root:not(.dark-theme) .hero-button.hero-button--support {
+  background: linear-gradient(135deg, #fb923c, #f97316);
+  border-color: rgba(249, 115, 22, 0.95);
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(249, 115, 22, 0.38);
+}
+
+:root:not(.dark-theme) .hero-button.hero-button--support:hover {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  box-shadow: 0 16px 36px rgba(234, 88, 12, 0.50);
+}
+
+:root:not(.dark-theme) .hero-button.hero-button--support:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(249, 115, 22, 0.35),
+    0 12px 28px rgba(249, 115, 22, 0.38);
+}
+
 :root:not(.dark-theme) .hero-button.hero-button-secondary {
   background: transparent;
   color: #111827;
@@ -2306,6 +2328,263 @@ body.modal-open {
 
   .video-modal__action {
     padding: 10px 10px;
+  }
+}
+
+
+
+
+/* WhatsApp flutuante (balão) — MAIS CHAMATIVO */
+.whatsapp-float{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #00E676, #25D366 55%, #128C7E);
+  color: #ffffff;
+
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow:
+    0 18px 48px rgba(18, 140, 126, 0.55),
+    0 0 0 6px rgba(37, 211, 102, 0.10);
+
+  position: fixed;
+  isolation: isolate;
+  transform: translateY(0);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+/* “Halo”/glow suave */
+.whatsapp-float::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:999px;
+  background: radial-gradient(circle, rgba(37,211,102,0.32) 0%, rgba(37,211,102,0.12) 35%, rgba(37,211,102,0) 70%);
+  z-index:-1;
+  opacity: 0.95;
+}
+
+/* Anel pulsando */
+.whatsapp-float::after{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:999px;
+  border: 2px solid rgba(37,211,102,0.55);
+  z-index:-1;
+  animation: waRing 1.6s ease-out infinite;
+}
+
+/* Selo “online” */
+.whatsapp-float .wa-dot{
+  position:absolute;
+  right: 6px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #22c55e;
+  border: 2px solid rgba(255,255,255,0.95);
+  box-shadow: 0 6px 16px rgba(34,197,94,0.55);
+}
+
+/* Ícone */
+.whatsapp-float svg{
+  width: 34px;
+  height: 34px;
+  display:block;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.25));
+}
+
+/* Balão (tooltip) — mais visível no desktop */
+.whatsapp-float .wa-bubble{
+  position:absolute;
+  right: 84px;
+  bottom: 16px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  white-space: nowrap;
+
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--color-card-shadow);
+
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.whatsapp-float .wa-bubble::after{
+  content:"";
+  position:absolute;
+  right:-6px;
+  bottom: 14px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: var(--color-card-bg);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Interações */
+.whatsapp-float:hover{
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.06);
+  box-shadow:
+    0 24px 70px rgba(18, 140, 126, 0.60),
+    0 0 0 8px rgba(37, 211, 102, 0.14);
+}
+
+.whatsapp-float:hover .wa-bubble{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.whatsapp-float:active{
+  transform: translateY(-1px) scale(1.0);
+}
+
+.whatsapp-float:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(37, 211, 102, 0.28),
+    0 18px 48px rgba(18, 140, 126, 0.55);
+}
+
+/* Animações */
+@keyframes waRing{
+  0%   { transform: scale(0.85); opacity: 0.0; }
+  10%  { opacity: 0.9; }
+  100% { transform: scale(1.28); opacity: 0.0; }
+}
+
+/* “Respiração” + atenção */
+@keyframes waBreathe{
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-2px) scale(1.02); }
+}
+
+.whatsapp-float.is-attention{
+  animation: waBreathe 2.2s ease-in-out infinite;
+}
+
+/* Respeita usuário que prefere menos movimento */
+@media (prefers-reduced-motion: reduce){
+  .whatsapp-float,
+  .whatsapp-float::after,
+  .whatsapp-float.is-attention{
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Mobile: ajusta tamanho e esconde balão */
+@media (max-width: 520px){
+  .whatsapp-float{
+    width: 64px;
+    height: 64px;
+    right: 14px;
+    bottom: 14px;
+  }
+  .whatsapp-float svg{
+    width: 32px;
+    height: 32px;
+  }
+  .whatsapp-float .wa-bubble{
+    display:none;
+  }
+}
+
+
+/* Ícone */
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* Balão (tooltip) */
+.whatsapp-float .wa-bubble {
+  position: absolute;
+  right: 70px;
+  bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--color-card-shadow);
+
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: none;
+
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.whatsapp-float .wa-bubble::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: 12px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: var(--color-card-bg);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.whatsapp-float:hover .wa-bubble {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Micro animação "reativa" */
+@keyframes waPulse {
+  0%   { box-shadow: 0 16px 40px rgba(18, 140, 126, 0.45); }
+  50%  { box-shadow: 0 18px 48px rgba(37, 211, 102, 0.55); }
+  100% { box-shadow: 0 16px 40px rgba(18, 140, 126, 0.45); }
+}
+
+.whatsapp-float.is-attention {
+  animation: waPulse 1.6s ease-in-out infinite;
+}
+
+/* Mobile: um pouco menor */
+@media (max-width: 520px) {
+  .whatsapp-float {
+    width: 54px;
+    height: 54px;
+    right: 14px;
+    bottom: 14px;
+  }
+  .whatsapp-float svg {
+    width: 28px;
+    height: 28px;
+  }
+  .whatsapp-float .wa-bubble {
+    display: none; /* evita cobrir conteúdo no mobile */
   }
 }
 
@@ -3437,5 +3716,21 @@ function filtrarVideos(termo) {
   });
 
 </script>
+
+
+<!-- WhatsApp flutuante -->
+<a class="whatsapp-float is-attention"
+   href="https://wa.me/5508009001014?text=Ol%C3%A1%21%20Quero%20falar%20com%20um%20atendente."
+   target="_blank" rel="noopener noreferrer"
+   aria-label="Falar no WhatsApp">
+  <span class="wa-bubble">Falar no WhatsApp</span>
+  <span class="wa-dot" aria-hidden="true"></span>
+  <!-- Ícone WhatsApp (SVG) -->
+  <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M19.11 17.83c-.27-.14-1.59-.78-1.84-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.33-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.83-2.01-.22-.53-.44-.46-.61-.46l-.52-.01c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.63 1.11 2.81.14.18 1.93 2.95 4.67 4.13.65.28 1.16.45 1.56.58.65.21 1.24.18 1.71.11.52-.08 1.59-.65 1.81-1.27.22-.62.22-1.16.16-1.27-.06-.11-.25-.18-.52-.32z"/>
+    <path fill="currentColor" d="M26.6 5.4C23.76 2.56 19.99 1 16 1 8.27 1 2 7.27 2 15c0 2.46.64 4.86 1.85 6.98L2 31l9.22-1.78A13.9 13.9 0 0 0 16 29c7.73 0 14-6.27 14-14 0-3.99-1.56-7.76-3.4-9.6zM16 26.6c-2.23 0-4.42-.6-6.33-1.73l-.45-.27-5.47 1.06 1.04-5.33-.29-.55A11.53 11.53 0 0 1 4.4 15C4.4 8.61 9.61 3.4 16 3.4c3.09 0 5.99 1.2 8.18 3.39A11.5 11.5 0 0 1 27.6 15c0 6.39-5.21 11.6-11.6 11.6z"/>
+  </svg>
+</a>
+
 </body>
 </html>
